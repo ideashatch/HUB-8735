@@ -5,11 +5,12 @@
 
 > The HUB 8735 Arduino SDK is fork from https://github.com/ambiot/ `Arduino SDK Development` `AmebaPro2 Family`
 > The version mapping is following below.
+
 |HUB 8735 Version      | ambiot Version       |Remarks                         |
 |:---------------------|:---------------------|:-------------------------------|
-|`4.0.1-build20230110` |`4.0.1-build20230110` | Modify pin define for HUB 8735 board 
-|`4.0.1-build20230217` |`4.0.2-build20230206` | ***feature addition*** and ***bug fix*** 
-|`4.0.2-build20230220` |`4.0.2-build20230216` | ***feature addition*** and ***bug fix***
+|`4.0.1-build20230110` |`4.0.1-build20230110` | Modify pin define for HUB 8735 board 		|
+|`4.0.1-build20230217` |`4.0.2-build20230206` | ***feature addition*** and ***bug fix***	| 
+|`4.0.2-build20230220` |`4.0.2-build20230216` | ***feature addition*** and ***bug fix***	|
 
 </br>
 
