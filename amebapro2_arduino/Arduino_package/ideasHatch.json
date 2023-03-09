@@ -18,8 +18,8 @@
           },
           "url": "https://github.com/ideashatch/HUB-8735/ambpro2_arduino/raw/dev/Arduino_package/release/4.0.2-build20230220_HUB8735.tar.gz",
           "archiveFileName": "4.0.2-build20230220_HUB8735.tar.gz",
-          "checksum": "SHA-256:e78879fc1dcc8cdcac4a4c7e68cec0d82b62d93fe68ad1aba6eeb1122da1368d",
-          "size": "93343942",
+          "checksum": "SHA-256:36c34a5b40f3bf0a29947bb7734e7af7798112cc8996de810d68d2d792564c77",
+          "size": "93139334",
           "boards": [
             {"name": "HUB 8735 (RTL8735B)"}
           ],
