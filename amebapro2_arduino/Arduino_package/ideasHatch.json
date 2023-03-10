@@ -117,8 +117,8 @@
               "host":"i686-mingw32",
               "archiveFileName":"ameba_pro2_toolchain_windows-1.0.1-p1.tar.bz2",
               "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_toolchain_windows-1.0.1-p1.tar.bz2",
-              "checksum":"SHA-256:1e08f3ce57a4b189e671bd151c4c39b947a9dbe3944affebd3f72cacb43a3e57",
-              "size":"166435153"
+              "checksum":"SHA-256:19ddee6f286fc5c30abcd5af238d5ac8a7f0331ba5753aa9476e7fef96f64b50",
+              "size":"90125343"
             },
             {
               "host":"x86_64-pc-linux-gnu",
@@ -140,6 +140,13 @@
           "name": "ameba_pro2_toolchain",
           "version":"1.0.1-p2",
           "systems": [
+            {
+              "host":"i686-mingw32",
+              "archiveFileName":"ameba_pro2_toolchain_windows-1.0.1-p2.tar.bz2",
+              "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_toolchain_windows-1.0.1-p2.tar.bz2",
+              "checksum":"SHA-256:2efdb80f1001c7cc3ef926c605e523bdfa6a05d1cef9bed7cfd5d0a214728223",
+              "size":"76361876"
+            },
             {
               "host":"x86_64-pc-linux-gnu",
               "archiveFileName":"ameba_pro2_toolchain_linux-1.0.1-p2.tar.bz2",
