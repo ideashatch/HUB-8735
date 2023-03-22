@@ -11,7 +11,7 @@
 |`4.0.1-build20230110` |`4.0.1-build20230110` | Modify pin define for HUB 8735 board 		|
 |`4.0.1-build20230217` |`4.0.2-build20230206` | ***feature addition*** and ***bug fix***	| 
 |`4.0.2-build20230220` |`4.0.2-build20230216` | ***feature addition*** and ***bug fix***	|
-
+|`4.0.3-build20230322` |`4.0.2-build20230220` | ***feature addition*** and ***bug fix***	|
 </br>
 
 ## 2. How to add HUB 8735 Ameba Arduino package to `Arduino IDE`:
