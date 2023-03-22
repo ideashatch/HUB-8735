@@ -25,6 +25,7 @@ extern "C" {
 #endif
 
 #include "us_ticker_api.h"
+#include "wiring_digital.h"
 __weak void _init(void) { }
 void __libc_init_array(void);
 

@@ -20,6 +20,7 @@
 
 #define ENABLE_ASP 1        //amebapro/pro2 AEC
 #define AUDIO_LOG_LEVEL 2   //set audio default log level, 0: no message, 1: all message, 2: warn, err message, 3: only err message
+#define AEC_LOG_EN 1
 
 #define CONFIG_MMF_AUDIO_DEBUG 0
 #define CONFIG_MMF_AUDIO_ATAF 1
@@ -205,6 +206,7 @@ typedef struct audio_ctx_s {
 
 	RX_cfg_t      rxcfg;
 	TX_cfg_t      txcfg;
+	uint8_t         rx_first_frame;
 
 	uint32_t        audio_timestamp_offset;
 } audio_ctx_t;
@@ -309,6 +311,7 @@ typedef struct audio_ctx_s {
 
 	RX_cfg_t        rxcfg;
 	TX_cfg_t        txcfg;
+	uint8_t         rx_first_frame;
 
 	uint32_t        audio_timestamp_offset;
 } audio_ctx_t;

@@ -11,9 +11,8 @@ NNFaceDetection	KEYWORD1
 FaceRecognitionResult	KEYWORD1
 NNFaceRecognition	KEYWORD1
 ObjectDetectionResult	KEYWORD1
-TestResult 	KEYWORD1
 NNObjectDetection	KEYWORD1
-NNTest	KEYWORD1
+
 #######################################
 # FaceDetectionResult.h Methods (KEYWORD2) & Constants (LITERAL1)
 #######################################
