@@ -157,6 +157,11 @@ void pinMode(uint32_t ulPin, uint32_t ulMode)
             gpio_irq_enable((gpio_irq_t *)pGpio_t);
             break;
 
+        case OUTPUT_PULLDOWN:
+            gpio_dir((gpio_t *)pGpio_t, PIN_OUTPUT);
+            gpio_mode((gpio_t *)pGpio_t, PullDown);
+            break;
+
         default:
             printf("Error Digital pin mode setup. \r\n");
             break;

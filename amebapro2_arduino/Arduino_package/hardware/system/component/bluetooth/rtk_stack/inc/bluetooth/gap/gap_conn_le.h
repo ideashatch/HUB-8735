@@ -1468,6 +1468,7 @@ T_GAP_CAUSE le_connect(uint8_t init_phys, uint8_t *remote_bd,
   */
 T_GAP_CAUSE le_conn_update_cfm(uint8_t conn_id, uint16_t result);
 #endif
+
 /**
   * @brief      Send connection parameter update request msg to bt stack. Connection parameter update result will be returned
   *             by @ref app_handle_conn_param_update_evt.
