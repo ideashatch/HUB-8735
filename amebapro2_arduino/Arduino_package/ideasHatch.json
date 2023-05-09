@@ -237,8 +237,8 @@
               "host": "i686-mingw32",
               "archiveFileName": "ameba_pro2_tools_windows-1.2.2.2.tar.gz",
               "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_windows-1.2.2.2.tar.gz",
-              "checksum": "SHA-256:aa10d51f19991b6f2afe09450b4b4914c46f6bc6651d7305a864672189b3b84f",
-              "size": "24804112"
+              "checksum": "SHA-256:2a1df713a8704ae53bb305d5b0e24598aa660a93e15166a33c40472f614dd5a7",
+              "size": "22590104"
             },
             {
               "host": "x86_64-pc-linux-gnu",
