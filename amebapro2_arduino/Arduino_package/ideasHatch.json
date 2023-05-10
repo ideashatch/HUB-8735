@@ -11,15 +11,15 @@
       	{
           "name": "ideasHatch Ameba Boards (32-bit Arm v8M @500MHz)",
           "architecture": "AmebaPro2",
-          "version": "4.0.3-build20230428",
+          "version": "4.0.3-build20230510",
           "category": "Contributed",
           "help": {
             "online": "https://forum.amebaiot.com/"
           },
-          "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.3-build_HUB8735.tar.gz",
-          "archiveFileName": "4.0.3-build_HUB8735.tar.gz",
-          "checksum": "SHA-256:16ef16e011b041d970ab21cfb5089c7144e80fad03cfb2196be31c9f2edffb61",
-          "size": "91103476",
+          "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.3-build20230510_HUB8735.tar.gz",
+          "archiveFileName": "4.0.3-build20230510_HUB8735.tar.gz",
+          "checksum": "SHA-256:b37cf21f177333b4a14fcf24acfa07c18778304b1cb745a5e9d23ffdf0ccbce4",
+          "size": "91103474",
           "boards": [
             {"name": "HUB 8735 (RTL8735B)"}
           ],
