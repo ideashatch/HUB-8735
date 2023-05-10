@@ -12,7 +12,7 @@ toolchain_version=1.0.1
 toolchain_version_p1={toolchain_version}-p1
 toolchain_version_p2={toolchain_version}-p2
 toolchain_p1_name=ameba_pro2_toolchain-{toolchain_version_p1}
-toolchain_p2_name=ameba_pro2_toolchain2-{toolchain_version_p2}
+toolchain_p2_name=ameba_pro2_toolchain-{toolchain_version_p2}
 
 # Ameba paths
 # ----------------------
