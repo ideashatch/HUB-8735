@@ -244,15 +244,15 @@
               "host": "x86_64-pc-linux-gnu",
               "archiveFileName": "ameba_pro2_tools_linux-1.2.2.2.tar.gz",
               "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_linux-1.2.2.2.tar.gz",
-              "checksum": "SHA-256:d6edcd18813c3275255a3e27aa589e3d6926a062ce54330b781520eeaf7a9502",
-              "size": "20120010"
+              "checksum": "SHA-256:a5a6dbc734066b3f33f6564bdfca80e411b9551f694329218971e88bb8746961",
+              "size": "19248742"
             },
             {
               "host": "x86_64-apple-darwin",
               "archiveFileName": "ameba_pro2_tools_macos-1.2.2.2.tar.gz",
               "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_macos-1.2.2.2.tar.gz",
-              "checksum": "SHA-256:83de2759571e1e722c00765fc13fe6cd12cc10b5e583b6152547939284d5a56f",
-              "size": "20849143"
+              "checksum": "SHA-256:c74388edffb66f580cae197e52c5b52741755c69a9b645c98e3d3a730a4963be",
+              "size": "17706559"
             }
           ]
         },
