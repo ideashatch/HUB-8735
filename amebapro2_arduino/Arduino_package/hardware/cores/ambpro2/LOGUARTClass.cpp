@@ -144,7 +144,7 @@ void LOGUARTClass::begin(const uint32_t dwBaudRate, uint8_t serial_config_value)
             serial_format(&log_uart_obj, 7, ParityNone, 1);
             break;
         case SERIAL_8N1:
-    serial_format(&log_uart_obj, 8, ParityNone, 1);
+            serial_format(&log_uart_obj, 8, ParityNone, 1);
             break;
 //      case SERIAL_5N2:
 //          break;

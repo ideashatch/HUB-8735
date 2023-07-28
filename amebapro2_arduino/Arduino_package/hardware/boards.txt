@@ -15,13 +15,6 @@ Ameba_HUB-8735.name=HUB-8735
 #Ameba_HUB-8735.vid.0=0x1A86
 #Ameba_HUB-8735.pid.0=0x7523
 
-Ameba_HUB-8735.upload.tool=ameba_pro2_tools
-Ameba_HUB-8735.upload.protocol=usb_serial
-Ameba_HUB-8735.upload.maximum_size=16777216
-Ameba_HUB-8735.upload.use_1200bps_touch=false
-Ameba_HUB-8735.upload.wait_for_upload_port=false
-Ameba_HUB-8735.upload.native_usb=false
-
 Ameba_HUB-8735.build.tarch=Arm-v8M
 Ameba_HUB-8735.build.mcu=RTL8735B
 Ameba_HUB-8735.build.f_cpu=500000000L
@@ -31,6 +24,16 @@ Ameba_HUB-8735.build.core=ambpro2
 Ameba_HUB-8735.build.extra_flags=-DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags}
 Ameba_HUB-8735.build.ldscript=linker_scripts/gcc/amebapro2_ram_arduino.ld
 Ameba_HUB-8735.build.variant=ameba_hub8735
+
+Ameba_HUB-8735.upload.tool=ameba_pro2_tools
+Ameba_HUB-8735.upload.protocol=usb_serial
+Ameba_HUB-8735.upload.maximum_size=16777216
+Ameba_HUB-8735.upload.use_1200bps_touch=false
+Ameba_HUB-8735.upload.wait_for_upload_port=false
+Ameba_HUB-8735.upload.native_usb=false
+Ameba_HUB-8735.upload.auto_mode=Disable
+Ameba_HUB-8735.upload.erase_flash=Disable
+Ameba_HUB-8735.upload.speed=2000000
 
 Ameba_HUB-8735.menu.EraseFlash.Disable=Disable
 Ameba_HUB-8735.menu.EraseFlash.Disable.build.erase_flash=Disable

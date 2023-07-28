@@ -6,13 +6,16 @@
 > The HUB 8735 Arduino SDK is fork from https://github.com/ambiot/ `Arduino SDK Development` `AmebaPro2 Family`
 > The version mapping is following below.
 
-|HUB 8735 Version      | ambiot Version       |Remarks                         |
-|:---------------------|:---------------------|:-------------------------------|
-|`4.0.1-build20230110` |`4.0.1-build20230110` | Modify pin define for HUB 8735 board 		|
-|`4.0.1-build20230217` |`4.0.2-build20230206` | ***feature addition*** and ***bug fix***	| 
-|`4.0.2-build20230220` |`4.0.2-build20230216` | ***feature addition*** and ***bug fix***	|
-|`4.0.3-build20230322` |`4.0.2-build20230220` | ***feature addition*** and ***bug fix***	|
-|`4.0.3-build20230428` |`4.0.3-build20230414` | ***4.0.3 Release***	   and ***bug fix***    |
+|HUB 8735 Version      		| ambiot Version       |Remarks                         					|
+|:--------------------------|:---------------------|:---------------------------------------------------|
+|`4.0.1-build20230110` 		|`4.0.1-build20230110` | Modify pin define for HUB 8735 board 				|
+|`4.0.1-build20230217` 		|`4.0.2-build20230206` | ***feature addition*** and ***bug fix***			| 
+|`4.0.2-build20230220` 		|`4.0.2-build20230216` | ***feature addition*** and ***bug fix***			|
+|`4.0.3-build20230322` 		|`4.0.2-build20230220` | ***feature addition*** and ***bug fix***			|
+|`4.0.3-build20230510` 		|`4.0.3-build20230414` | ***4.0.3 Release***	and ***bug fix***    		|
+|`4.0.4-build20230601` 		|`4.0.3-build20230414` | ***4.0.3 Release***	and ***update tools***		|
+|`4.0.4-build20230615` 		|`4.0.3-build20230414` | ***4.0.3 Release***	and ***update tools***		|
+|`4.0.4-Release-20230727` 	|`4.0.3-build20230414` | ***4.0.4 Release***								|
 </br>
 
 ## 2. How to add HUB 8735 Ameba Arduino package to `Arduino IDE`:

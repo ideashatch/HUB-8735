@@ -33,7 +33,7 @@ extern void randomSeed(uint32_t dwSeed) {
         _rtl_seed = dwSeed;
         s_useRandomHW = false; //if randomSeed is called, useRandom=false by default.
     }
-    }
+}
 
 uint32_t random_calculate (uint32_t rtl_seed) {
     uint32_t hi32, lo32;
@@ -61,9 +61,7 @@ extern long random(long howsmall, long howbig) {
     if (howsmall >= howbig) {
         return howsmall;
     }
-
     long diff = howbig - howsmall;
-
     return (random(diff) + howsmall);
 }
 

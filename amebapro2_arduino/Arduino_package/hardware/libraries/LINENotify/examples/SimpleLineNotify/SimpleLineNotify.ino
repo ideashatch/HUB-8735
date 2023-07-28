@@ -33,7 +33,7 @@ void setup() {
     Serial.println("\nStarting connection to server...");
     // if you get a connection, report back via serial:
 	client.setLineToken("*******************************************");		//Enter your license
-	
+
     if (client.connect(server, 443)) {
         Serial.println("connected to server");
         client.send("Line Notify message",0);						//Enter your message

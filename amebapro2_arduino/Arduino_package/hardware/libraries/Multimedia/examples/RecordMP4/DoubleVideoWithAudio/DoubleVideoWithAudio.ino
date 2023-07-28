@@ -24,7 +24,7 @@
 
 VideoSetting configV1(0);
 VideoSetting configV2(1);
-AudioSetting configA(0);
+AudioSetting configA(3);
 Audio audio;
 AAC aac;
 MP4Recording mp4_1;

@@ -11,15 +11,15 @@ uint32_t image_len = 0;
 int voe_heap_size = 0;
 
 static video_params_t video_params = {
-    .stream_id      = 0, 
-    .type           = 0, 
-    .resolution     = 0, 
-    .width          = 0, 
-    .height         = 0, 
-    .bps            = 0, 
-    .fps            = 0, 
-    .gop            = 0, 
-    .rc_mode        = 0, 
+    .stream_id      = 0,
+    .type           = 0,
+    .resolution     = 0,
+    .width          = 0,
+    .height         = 0,
+    .bps            = 0,
+    .fps            = 0,
+    .gop            = 0,
+    .rc_mode        = 0,
     .jpeg_qlevel = 5,
     .use_static_addr = 1
 };
