@@ -1,10 +1,10 @@
 20221209_Release_Note
 ------File List-------
-Software								Description
+Software									Description
 	1.binary_for_HUB8735_v94b_1209.rar					v94b_1209 firmware.
-	2.HUB 8735 ¶}µoªO¡iArduino ¨Ï¥Î»¡©ú¡j_20230103.pdf			HUB 8735 Arduino Development Instructions.
+	2.HUB 8735 é–‹ç™¼æ¿ã€Arduino ä½¿ç”¨èªªæ˜ã€‘_20230103.pdf			HUB 8735 Arduino Development Instructions.
 	3.HUB 8735-AT User Guide_20230103.pdf					HUB 8735-AT User Guide.
-	4.HUB 8735 Standard SDK¨Ï¥Î»¡©ú_20230105.pdf				HUB 8735 Standard SDK Development Instructions.
+	4.HUB 8735 Standard SDKä½¿ç”¨èªªæ˜_20230105.pdf				HUB 8735 Standard SDK Development Instructions.
 	5.sdcard_for_HUB8735_AI_DEMO_v2.rar					SD card related files of HUB 8735 AIDEMO.
 	6.HUB 8735 UART download Tools.rar					HUB 8735 UART download tools.
 Hardware
@@ -16,5 +16,9 @@ Hardware
 
 20230320_Release_Note
 ------- Add Software file-------
-	1.HUB 8735 ¶}µoªO¡iÂ÷½uAI¼Ò«¬Âà´«¡j_20230317.pdf			HUB 8735 AI¼Ò«¬Âà´«
-	2.HUB 8735 ¶}µoªO¡iArduino ¨Ï¥Î»¡©ú¡j_20230103.pdf			HUB 8735 Arduino Development Instructions.
+	1.HUB 8735 é–‹ç™¼æ¿ã€é›¢ç·šAIæ¨¡å‹è½‰æ›ã€‘_20230317.pdf				HUB 8735 AIæ¨¡å‹è½‰æ›
+	2.HUB 8735 é–‹ç™¼æ¿ã€Arduino ä½¿ç”¨èªªæ˜ã€‘_20230310.pdf			HUB 8735 Arduino Development Instructions.
+
+20230905_Release_Note
+------- Remove Software file-------
+	1.HUB 8735 é–‹ç™¼æ¿ã€é›¢ç·šAIæ¨¡å‹è½‰æ›ã€‘_20230103.pdf				remove old version.
