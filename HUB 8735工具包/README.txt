@@ -1,6 +1,6 @@
 20221209_Release_Note
 ------File List-------
-Software								Description
+Software									Description
 	1.binary_for_HUB8735_v94b_1209.rar					v94b_1209 firmware.
 	2.HUB 8735 開發板【Arduino 使用說明】_20230103.pdf			HUB 8735 Arduino Development Instructions.
 	3.HUB 8735-AT User Guide_20230103.pdf					HUB 8735-AT User Guide.
@@ -16,5 +16,9 @@ Hardware
 
 20230320_Release_Note
 ------- Add Software file-------
-	1.HUB 8735 開發板【離線AI模型轉換】_20230317.pdf			HUB 8735 AI模型轉換
+	1.HUB 8735 開發板【離線AI模型轉換】_20230317.pdf				HUB 8735 AI模型轉換
 	2.HUB 8735 開發板【Arduino 使用說明】_20230310.pdf			HUB 8735 Arduino Development Instructions.
+
+20230905_Release_Note
+------- Remove Software file-------
+	1.HUB 8735 開發板【離線AI模型轉換】_20230103.pdf				remove old version.
