@@ -16,8 +16,8 @@
           "help": {
             "online": "https://forum.amebaiot.com/"
           },
-          "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.6-build20230510_HUB8735.tar.gz",
-          "archiveFileName": "4.0.6-build20230510_HUB873.tar.gz",
+          "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.6-build20230922_HUB8735.tar.gz",
+          "archiveFileName": "4.0.6-build20230922_HUB873.tar.gz",
           "checksum": "SHA-256:74213a59e33a808184a46a744108c5c9588a3b4009e42af26c12979ec3ee5f91",
           "size": "93570117",
           "boards": [
