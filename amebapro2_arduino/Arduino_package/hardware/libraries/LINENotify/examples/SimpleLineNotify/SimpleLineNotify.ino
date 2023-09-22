@@ -1,13 +1,19 @@
 #include <WiFi.h>
 #include "SSLLineNotify.h"
+#include "VideoStream.h"
+#include "AmebaFatFS.h"
 
-char ssid[] = "yourNetwork"; // your network SSID (name)
-char pass[] = "Password";    // your network password (use for WPA, or use as key for WEP)
+char ssid[] = "yourssid"; // your network SSID (name)
+char pass[] = "password";    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 
 int status = WL_IDLE_STATUS;
 
 char server[] = "notify-api.line.me";    // name address for Google (using DNS)
+
+#define CHANNEL 0
+
+VideoSetting config(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);
 
 LineNotify client;
 void setup() {
@@ -17,6 +23,11 @@ void setup() {
         ;
     }
 
+    //new
+    Camera.configVideoChannel(CHANNEL, config);
+    Camera.videoInit();
+    Camera.channelBegin(CHANNEL);
+      
     // attempt to connect to Wifi network:
     while (status != WL_CONNECTED) {
         Serial.print("Attempting to connect to SSID: ");
@@ -32,12 +43,16 @@ void setup() {
 
     Serial.println("\nStarting connection to server...");
     // if you get a connection, report back via serial:
-	client.setLineToken("*******************************************");		//Enter your license
+	  client.setLineToken("-------------------------------------------");		//Enter your license
 
     if (client.connect(server, 443)) {
         Serial.println("connected to server");
-        client.send("Line Notify message",0);						//Enter your message
-    }
+        //client.send("Line Notify message",0);						//Enter your message
+        //client.sendStricker("Stricker Test",520,2,0);
+        client.sendCameraImage("Camera Test", client, Camera, CHANNEL,0);	
+        //client.sendSDImage("SD Image Test", client, "1.jpg" ,0);	//Need put 1.jpg file in SD card
+        //client.sendurlImage("URL Image Test", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/240px-Cat03.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/240px-Cat03.jpg" ,0);
+    }   
     else
     {
         Serial.println("connected to server failed");

@@ -5,6 +5,7 @@
 #include "Client.h"
 #include "IPAddress.h"
 #include "ssl_drv.h"
+#include "VideoStream.h"
 
 struct mbedtls_ssl_context;
 
@@ -41,7 +42,10 @@ class LineNotify : public Client {
         int connect(IPAddress ip, uint16_t port, unsigned char* pskIdent, unsigned char* psKey);
 
 		void send(char *msg, bool notificationDisabled);
-		void multisend(char *msg, char *imageThumbnail, char *imageFullsize, char *imageFile, int stickerPackageId, int stickerId, bool notificationDisabled);
+		void sendCameraImage(String msg, LineNotify client, Video camera, int ch, bool notificationDisabled);
+		void sendurlImage(char *msg, char *imageFullsize, char *imageThumbnail, bool notificationDisabled);
+		void sendSDImage(String msg, LineNotify client, String imagePath, bool notificationDisabled);
+		void sendStricker(char *msg, int stickerId, int stickerPackageId, bool notificationDisabled);
         using Print::write;
         int setRecvTimeout(int timeout);
 
