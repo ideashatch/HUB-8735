@@ -43,7 +43,7 @@ extern void wait_for_debug(void);
 
 #define MAIN_THREAD_STACK_SIZE                  (4096 * 4)
 
-#define TOTAL_GPIO_PIN_NUM                      (30)
+#define TOTAL_GPIO_PIN_NUM                      (31)
 #define TOTAL_PWM_PIN_NUM                       (10)
 
 /* Digital pin mapping refer to g_APinDescription */
@@ -77,6 +77,8 @@ extern void wait_for_debug(void);
 #define AMB_D26                                 26 // 5V
 #define AMB_D27                                 27 // PF_1
 #define AMB_D28                                 28 // PF_2
+#define AMB_D29                                 29 // PE_6
+#define AMB_D30                                 30 // PF_9
 //#define AMB_D29                                 29 // PF_10
 
 /* Analog pin mapping */

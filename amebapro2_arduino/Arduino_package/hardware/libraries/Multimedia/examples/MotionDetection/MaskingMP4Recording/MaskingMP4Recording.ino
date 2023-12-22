@@ -1,13 +1,11 @@
 /*
+This example acts as a Security System based on Motion Detection, which would start to record a 
+ 30 seconds long MP4 video everytime motion is detected. (Alarm function could be initiated as well, but on default disabled)
 
  Example guide:
- https://www.amebaiot.com/en/amebapro2-amb82-mini-arduino-video-motion-mp4/
-
- For recommended setting to achieve better video quality, please refer to our Ameba FAQ: https://forum.amebaiot.com/t/welcome-to-ameba-faq/1748
-
- This example acts as a Security System based on Motion Detection, which would start to record a 
- 30 seconds long MP4 video everytime motion is detected. (Alarm function could be initiated as well, but on default disabled)
+ https://www.amebaiot.com/en/amebapro2-arduino-video-motion-mp4/
  */
+
 #include "WiFi.h"
 #include "StreamIO.h"
 #include "VideoStream.h"
@@ -35,7 +33,7 @@
 #define GREEN_LED  4
 //#define BUZZER_PIN 7
 
-AudioSetting configA(3);
+AudioSetting configA(0);
 VideoSetting configV(VIDEO_FHD, CAM_FPS, VIDEO_H264, 0);
 VideoSetting configMD(VIDEO_VGA, 10, VIDEO_RGB, 0);     // Low resolution RGB video for motion detection
 Audio audio;

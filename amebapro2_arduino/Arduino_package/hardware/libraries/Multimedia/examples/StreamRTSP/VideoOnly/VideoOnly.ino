@@ -1,10 +1,10 @@
 /*
+ Please adjust VideoSetting to get better video quality when streaming to V7RC APP:
+     VideoSetting config(VIDEO_D1, CAM_FPS, VIDEO_H264, 0);
 
  Example guide:
- https://www.amebaiot.com/en/amebapro2-amb82-mini-arduino-video-rtsp/
-
- For recommended setting to achieve better video quality, please refer to our Ameba FAQ: https://forum.amebaiot.com/t/ameba-faq/1220
- */
+ https://www.amebaiot.com/en/amebapro2-arduino-video-rtsp/
+*/
 
 #include "WiFi.h"
 #include "StreamIO.h"

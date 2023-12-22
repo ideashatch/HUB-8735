@@ -16,6 +16,7 @@ char server[] = "notify-api.line.me";    // name address for Google (using DNS)
 VideoSetting config(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);
 
 LineNotify client;
+
 void setup() {
     //Initialize serial and wait for port to open:
     Serial.begin(115200);

@@ -9,8 +9,8 @@
  * other picture on it.
  * 
  * Example guide:
- * https://www.amebaiot.com/en/amebapro2-amb82-mini-arduino-spi-lcd/
- **/
+ * https://www.amebaiot.com/en/amebapro2-arduino-spi-lcd/
+ */
 
 #include "SPI.h"
 #include "AmebaILI9341.h"

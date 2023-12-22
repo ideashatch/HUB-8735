@@ -44,7 +44,7 @@ PinDescription g_APinDescription[TOTAL_GPIO_PIN_NUM]=
     {PF_8, 	TYPE_DIGITAL,               PIO_GPIO | PIO_GPIO_IRQ | PIO_PWM          	, MODE_NOT_INITIAL}, // AMB_D7		SPI1_SS
     {PF_7, 	TYPE_DIGITAL,               PIO_GPIO | PIO_GPIO_IRQ | PIO_PWM          	, MODE_NOT_INITIAL}, // AMB_D8		SPI1_MOSI	
     {PF_6,  TYPE_DIGITAL, 				PIO_GPIO | PIO_GPIO_IRQ | PIO_PWM          	, MODE_NOT_INITIAL}, // AMB_D9     	SPI1_CLK
-    {PE_5,  TYPE_DIGITAL, 				PIO_GPIO | PIO_GPIO_IRQ           			, MODE_NOT_INITIAL}, // AMB_D10    	SPI1_MISO
+    {PF_5,  TYPE_DIGITAL, 				PIO_GPIO | PIO_GPIO_IRQ           			, MODE_NOT_INITIAL}, // AMB_D10    	SPI1_MISO
     {PE_2,  TYPE_DIGITAL, 				PIO_GPIO | PIO_GPIO_IRQ           			, MODE_NOT_INITIAL}, // AMB_D11		SERIAL3_RX
     {PE_1,  TYPE_DIGITAL,               PIO_GPIO | PIO_GPIO_IRQ                    	, MODE_NOT_INITIAL}, // AMB_D12  	SERIAL3_TX  
     {NC,  	TYPE_DIGITAL,               NOT_INITIAL                    				, MODE_NOT_INITIAL}, // AMB_D13    
@@ -63,6 +63,8 @@ PinDescription g_APinDescription[TOTAL_GPIO_PIN_NUM]=
     {NC,  	TYPE_DIGITAL,               NOT_INITIAL                    				, MODE_NOT_INITIAL}, // *AMB_D26   
     {PF_1,  TYPE_DIGITAL | TYPE_ANALOG, PIO_GPIO | PIO_GPIO_IRQ 		  | PIO_ADC	, MODE_NOT_INITIAL}, // *AMB_D27   	*LOG_RTS        I2C1_SCL
     {PF_2,  TYPE_DIGITAL | TYPE_ANALOG, PIO_GPIO | PIO_GPIO_IRQ 		  | PIO_ADC	, MODE_NOT_INITIAL}, // *AMB_D28   	*LOG_CTS        I2C1_SDA
+    {PE_6,  TYPE_DIGITAL | TYPE_ANALOG, PIO_GPIO | PIO_GPIO_IRQ 		  | PIO_ADC	, MODE_NOT_INITIAL}, // *AMB_D29   	*LOG_CTS        I2C1_SDA
+    {PF_9,  TYPE_DIGITAL | TYPE_ANALOG, PIO_GPIO | PIO_GPIO_IRQ 		  | PIO_ADC	, MODE_NOT_INITIAL}, // *AMB_D30   	*LOG_CTS        I2C1_SDA
     //{PF_10, TYPE_DIGITAL,               PIO_GPIO | PIO_GPIO_IRQ                    , MODE_NOT_INITIAL}  // *AMB_D29  
 };
 
