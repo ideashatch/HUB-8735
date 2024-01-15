@@ -18,6 +18,7 @@
 |`4.0.5-Release-20230727` 	|`4.0.4-1`             | ***4.0.4 Release***								|
 |`4.0.6-Release-20230922` 	|`4.0.4-1`             | ***feature addition***	Add line Notify image		|
 |`4.0.7-Release-20231220` 	|`4.0.5`               | ***Add NN for Audio classification and support portable|
+|`4.0.8-Release-20240115` 	|`4.0.5`               | ***Add new board "HUB 8735 ultra" ***				|
 
 </br>
 
