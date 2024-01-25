@@ -41,10 +41,17 @@
 #define value1  0
 #define value2  1
 
-#define MotoA_1A 16   //GPIO
-#define MotoA_1B 7    //PWM
-#define MotoB_1A 17   //GPIO
-#define MotoB_1B 8    //PWM
+#ifdef HUB8735_ULTRA
+#define MotoA_1A 10   //GPIO	PA_3
+#define MotoA_1B 21    //PWM	PF_8
+#define MotoB_1A 9   //GPIO	PA_2	
+#define MotoB_1B 20    //PWM	PF_7
+#else
+#define MotoA_1A 4   //GPIO	PA_3
+#define MotoA_1B 7    //PWM	PF_8
+#define MotoB_1A 5   //GPIO	PA_2
+#define MotoB_1B 8    //PWM	PF_7
+#endif
 
 #define CHANNEL 1
 

@@ -23,10 +23,17 @@
 #define STRING_BUF_SIZE 100
 
 // Pin Definition
+#ifdef HUB8735_ULTRA
+#define RED_LED    LED_B		//use internal blue led
+#define GREEN_LED  LED_G		//use internal green led
+#define BUTTON_PIN PUSH_BTN		//use internal button
+#define SERVO_PIN  20			//PF_7
+#else
 #define RED_LED    3
 #define GREEN_LED  4
 #define BUTTON_PIN 5
 #define SERVO_PIN  8
+#endif
 
 VideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);
 AmebaServo myservo;
@@ -53,7 +60,7 @@ void setup() {
     // GPIO Initialisation
     pinMode(RED_LED, OUTPUT);
     pinMode(GREEN_LED, OUTPUT);
-    pinMode(BUTTON_PIN, INPUT);
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
     myservo.attach(SERVO_PIN);
 
     Serial.begin(115200);

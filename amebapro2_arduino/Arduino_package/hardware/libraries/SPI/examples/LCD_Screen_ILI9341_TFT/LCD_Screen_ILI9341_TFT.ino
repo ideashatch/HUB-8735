@@ -19,10 +19,15 @@
 
 // For all supportted boards (AMB21/AMB22, AMB23, BW16/BW16-TypeC, AW-CU488_ThingPlus), 
 // Select 2 GPIO pins connect to TFT_RESET and TFT_DC. And default SPI_SS/SPI1_SS connect to TFT_CS.
+#ifdef HUB8735_ULTRA
+#define TFT_RESET       1//PF_1
+#define TFT_DC          0//PF_2
+#define TFT_CS          SPI1_SS	//PF_8
+#else
 #define TFT_RESET       27//PF_1//5
 #define TFT_DC          28//PF_2//4
 #define TFT_CS          SPI1_SS
-
+#endif
 AmebaILI9341 tft = AmebaILI9341(TFT_CS, TFT_DC, TFT_RESET);
 
 #define ILI9341_SPI_FREQUENCY 20000000

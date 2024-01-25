@@ -13,10 +13,13 @@
  * Example guide:
  * https://www.amebaiot.com/en/amebapro2-arduino-gpio-ultrasonic/
  */
-
+#ifdef HUB8735_ULTRA
+const int trigger_pin = 3;	//PE_4
+const int echo_pin    = 2;	//PF_0
+#else
 const int trigger_pin = 12;
 const int echo_pin    = 11;
-
+#endif
 void setup() {
     Serial.begin(115200);
     pinMode(trigger_pin, OUTPUT);

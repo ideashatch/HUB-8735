@@ -1,4 +1,4 @@
-/*
+﻿/*
 
  Example guide:
  https://www.amebaiot.com/en/amebapro2-arduino-ble-dht/
@@ -14,8 +14,11 @@
 #define STRING_BUF_SIZE 100
 
 // The digital pin we're connected to.
-#define DHTPIN 8
-
+#ifdef HUB8735_ULTRA
+#define DHTPIN 20	//PF_7
+#else
+#define DHTPIN 8	//PF_7
+#endif
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22 (AM2302), AM2321

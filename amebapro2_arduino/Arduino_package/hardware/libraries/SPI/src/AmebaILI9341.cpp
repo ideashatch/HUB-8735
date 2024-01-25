@@ -9,7 +9,7 @@ AmebaILI9341::AmebaILI9341(int csPin, int dcPin, int resetPin) {
     _csPin = csPin; // TODO: no effect now, use pin 10 as default
     _dcPin = dcPin;
     _resetPin = resetPin;
-
+	
     _dcPort = _dcMask = 0;
 
     _width = ILI9341_TFTWIDTH;
@@ -26,11 +26,11 @@ AmebaILI9341::AmebaILI9341(int csPin, int dcPin, int resetPin) {
 void AmebaILI9341::begin(void) {
     pinMode(_resetPin, OUTPUT);
     digitalWrite(_resetPin, LOW);
-
+	printf("111\n\r");
     pinMode(_dcPin, OUTPUT);
     _dcPort = digitalPinToPort(_dcPin);
     _dcMask = digitalPinToBitMask(_dcPin);
-
+	printf("222\n\r");
     SPI.begin();
 
     reset();

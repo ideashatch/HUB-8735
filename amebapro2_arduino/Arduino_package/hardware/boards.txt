@@ -60,3 +60,51 @@ Ameba_HUB-8735.menu.UploadSpeed.Speed2M.build.upload_speed=2000000
 Ameba_HUB-8735.menu.UploadSpeed.Speed230400=230400
 Ameba_HUB-8735.menu.UploadSpeed.Speed230400.build.upload_speed=230400
 ##############################################################
+Ameba_HUB-8735_ultra.name=HUB-8735_ultra
+#Ameba_HUB-8735_ultra.vid.0=0x1A86
+#Ameba_HUB-8735_ultra.pid.0=0x7523
+
+Ameba_HUB-8735_ultra.build.tarch=Arm-v8M
+Ameba_HUB-8735_ultra.build.mcu=RTL8735B
+Ameba_HUB-8735_ultra.build.f_cpu=500000000L
+Ameba_HUB-8735_ultra.build.usb_product="HUB-8735_ultra"
+Ameba_HUB-8735_ultra.build.board=AMEBA
+Ameba_HUB-8735_ultra.build.core=ambpro2
+Ameba_HUB-8735_ultra.build.extra_flags=-DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 -DBOARD_AMB82_HUB8735_ULTRA {build.usb_flags}
+Ameba_HUB-8735_ultra.build.ldscript=linker_scripts/gcc/amebapro2_ram_arduino.ld
+Ameba_HUB-8735_ultra.build.variant=ameba_hub8735_ultra
+
+Ameba_HUB-8735_ultra.upload.tool=ameba_pro2_tools
+Ameba_HUB-8735_ultra.upload.protocol=usb_serial
+Ameba_HUB-8735_ultra.upload.maximum_size=16777216
+Ameba_HUB-8735_ultra.upload.use_1200bps_touch=false
+Ameba_HUB-8735_ultra.upload.wait_for_upload_port=false
+Ameba_HUB-8735_ultra.upload.native_usb=false
+Ameba_HUB-8735_ultra.upload.auto_mode=Disable
+Ameba_HUB-8735_ultra.upload.erase_flash=Disable
+Ameba_HUB-8735_ultra.upload.speed=2000000
+
+Ameba_HUB-8735_ultra.menu.EraseFlash.Disable=Disable
+Ameba_HUB-8735_ultra.menu.EraseFlash.Disable.build.erase_flash=Disable
+Ameba_HUB-8735_ultra.menu.EraseFlash.Enable=Erase only
+Ameba_HUB-8735_ultra.menu.EraseFlash.Enable.build.erase_flash=Enable
+Ameba_HUB-8735_ultra.menu.EraseFlash.EnableUpload=Erase then Upload
+Ameba_HUB-8735_ultra.menu.EraseFlash.EnableUpload.build.erase_flasg=Enable_Upload
+
+Ameba_HUB-8735_ultra.menu.AutoUploadMode.Disable=Disable
+Ameba_HUB-8735_ultra.menu.AutoUploadMode.Disable.build.auto_upload_mode=Disable
+Ameba_HUB-8735_ultra.menu.AutoUploadMode.Enable=Enable
+Ameba_HUB-8735_ultra.menu.AutoUploadMode.Enable.build.auto_upload_mode=Enable
+
+Ameba_HUB-8735_ultra.menu.StdLibInit.Disable=Disable
+Ameba_HUB-8735_ultra.menu.StdLibInit.Disable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags}
+Ameba_HUB-8735_ultra.menu.StdLibInit.Enable=Arduino_STD_PRINTF
+Ameba_HUB-8735_ultra.menu.StdLibInit.Enable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags} -DArduino_STD_PRINTF
+
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed2M=2000000
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed2M.build.upload_speed=2000000
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed=921600
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed.build.upload_speed=921600
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed230400=230400
+Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed230400.build.upload_speed=230400
+##############################################################

@@ -95,7 +95,9 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
 
     // perform blocking read into buffer
     readed = i2c_read(((i2c_t *)this->pI2C), ((int)address), ((char*)&this->rxBuffer[0]), ((int)quantity), ((int)sendStop));
-
+#ifdef BOARD_AMB82_HUB8735
+	delay(5);
+#endif
     // i2c_read error;
     if (readed != 0) {
         printf("\r\n[ERROR] requestFrom: readed=%d, quantity=%d \n", readed, quantity);
@@ -158,6 +160,9 @@ uint8_t TwoWire::endTransmission(uint8_t sendStop) {
     uint8_t error = 0;
 
     length = i2c_write(((i2c_t *)this->pI2C), ((int)this->txAddress), ((const char*)&this->txBuffer[0]), ((int)this->txBufferLength), ((int)sendStop));
+#ifdef BOARD_AMB82_HUB8735
+	delay(5);
+#endif    
     if ((txBufferLength > 0) && (length <= 0)) {
         error = 1;
     }
@@ -268,5 +273,10 @@ size_t TwoWire::slaveWrite(uint8_t *buffer, size_t len) {
 
 #endif
 
-TwoWire Wire  = TwoWire((void *)(&i2cwire0), 28, 27);
-TwoWire Wire1  = TwoWire((void *)(&i2cwire1), 28, 27);
+#ifdef HUB8735_ULTRA
+TwoWire Wire  = TwoWire((void *)(&i2cwire0), I2C_SDA, I2C_SCL);
+TwoWire Wire1  = TwoWire((void *)(&i2cwire1), I2C1_SDA, I2C1_SCL);
+#else
+TwoWire Wire  = TwoWire((void *)(&i2cwire0), I2C1_SDA, I2C1_SCL);
+TwoWire Wire1  = TwoWire((void *)(&i2cwire1), I2C1_SDA, I2C1_SCL);
+#endif

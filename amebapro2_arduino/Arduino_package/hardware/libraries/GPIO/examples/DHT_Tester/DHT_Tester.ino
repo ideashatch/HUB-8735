@@ -1,4 +1,4 @@
-/*
+﻿/*
  Example testing sketch for various DHT humidity/temperature sensors
  Written by ladyada, public domain
 
@@ -12,7 +12,11 @@
 #include "DHT.h"
 
 // The digital pin we're connected to.
+#ifdef HUB8735_ULTRA
+#define DHTPIN 20	//PF_7
+#else
 #define DHTPIN 8
+#endif
 
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11   // DHT 11

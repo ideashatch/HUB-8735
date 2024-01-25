@@ -51,13 +51,20 @@
 #define NNWIDTH     576
 #define NNHEIGHT    320
 
+#ifdef HUB8735_ULTRA
+#define RED_LED                   LED_B
+#define GREEN_LED                 LED_G
+#define BACKUP_FACE_BUTTON_PIN    5	//PE_2
+#define EN_REGMODE_BUTTON_PIN     PUSH_BTN
+#define SERVO_PIN                 20	//PF_7
+#else
 // Pin Definition
 #define RED_LED                   3
 #define GREEN_LED                 4
 #define BACKUP_FACE_BUTTON_PIN    5
 #define EN_REGMODE_BUTTON_PIN     6
 #define SERVO_PIN                 8
-
+#endif
 VideoSetting configVID(VIDEO_FHD, 30, VIDEO_H264, 0);
 VideoSetting configJPEG(VIDEO_FHD, CAM_FPS, VIDEO_JPEG, 1);
 VideoSetting configNN(NNWIDTH, NNHEIGHT, 10, VIDEO_RGB, 0);
@@ -89,7 +96,7 @@ void setup() {
     pinMode(RED_LED, OUTPUT);
     pinMode(GREEN_LED, OUTPUT);
     pinMode(BACKUP_FACE_BUTTON_PIN, INPUT);
-    pinMode(EN_REGMODE_BUTTON_PIN, INPUT);
+    pinMode(EN_REGMODE_BUTTON_PIN, INPUT_PULLUP);
     myservo.attach(SERVO_PIN);
 
     Serial.begin(115200);

@@ -96,6 +96,12 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
+#ifdef HUB8735_ULTRA
+#define PWM_PIN 20	//GPF_7
+#else
+#define PWM_PIN 8
+#endif
+
 int melody[] = {
     NOTE_G4, NOTE_G4, NOTE_E4, NOTE_D4, NOTE_E4, NOTE_D4, NOTE_C4, 
     NOTE_E4, NOTE_D4, NOTE_C4, NOTE_A3, NOTE_G3, NOTE_A3, NOTE_G3, 
@@ -114,7 +120,7 @@ void play(int *melody, int *noteDurations, int num) {
     for (int note = 0; note < num; note++) {
         int noteDuration = 3000 / noteDurations[note];
 
-        tone(8, melody[note], noteDuration);
+        tone(PWM_PIN, melody[note], noteDuration);
 
         delay(noteDuration * 1.30);
     }

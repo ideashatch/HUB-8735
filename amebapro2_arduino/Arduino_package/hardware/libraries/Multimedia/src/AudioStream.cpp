@@ -221,7 +221,7 @@ void Audio::begin(void) {
     mm_module_ctrl(_p_mmf_context, MM_CMD_SET_QUEUE_LEN, 6);
     mm_module_ctrl(_p_mmf_context, MM_CMD_INIT_QUEUE_ITEMS, MMQI_FLAG_STATIC);
     mm_module_ctrl(_p_mmf_context, CMD_AUDIO_APPLY, 0);
-#ifdef BOARD_AMB82_HUB8735    
+#ifdef BOARD_AMB82_HUB8735
     audio_dmic_depinmux((audio_t *)_p_mmf_context, MINI_DMIC_CLK_PIN, DMIC_DATA_PIN);
 	audio_dmic_pinmux((audio_t *)_p_mmf_context, DMIC_CLK_PIN, DMIC_DATA_PIN);
 #endif	

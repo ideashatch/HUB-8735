@@ -51,7 +51,7 @@ class HUB8735FatFS {
         int setLastModTime(char *path, uint16_t year, uint16_t month, uint16_t date, uint16_t hour, uint16_t minute, uint16_t second);
 
         int status(void);
-		void sd_upgrade(void);
+	void sd_upgrade(int led);
 		
     private:
         int getAttribute(char *path, unsigned char *attr);

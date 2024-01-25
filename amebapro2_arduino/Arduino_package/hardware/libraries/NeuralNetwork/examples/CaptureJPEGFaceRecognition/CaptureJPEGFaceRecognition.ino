@@ -50,11 +50,16 @@
 #define NNWIDTH     576
 #define NNHEIGHT    320
 
+#ifdef HUB8735_ULTRA
+#define RED_LED                   LED_B	//use internal blue led
+#define GREEN_LED                 LED_G	//use internal green led
+#define BUTTON_PIN                PUSH_BTN	//use internal button
+#else
 // Pin Definition
 #define RED_LED                   3
 #define GREEN_LED                 4
 #define BUTTON_PIN                5
-
+#endif
 // Select the maximum number of snapshots to capture
 #define MAX_UNKNOWN_COUNT 5
 
@@ -86,7 +91,7 @@ void setup() {
     // GPIO Initialization
     pinMode(RED_LED, OUTPUT);
     pinMode(GREEN_LED, OUTPUT);
-    pinMode(BUTTON_PIN, INPUT);
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
 
     Serial.begin(115200);
 

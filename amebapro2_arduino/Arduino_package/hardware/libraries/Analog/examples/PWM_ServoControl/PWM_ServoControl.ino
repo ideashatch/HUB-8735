@@ -22,8 +22,14 @@ AmebaServo myservo;
 // variable to store the servo position
 int pos = 0;
 
+#ifdef HUB8735_ULTRA
+#define PWM_PIN 20	//GPF_7
+#else
+#define PWM_PIN 8
+#endif
+
 void setup() {
-    myservo.attach(8);
+    myservo.attach(PWM_PIN);
 }
 
 void loop() {

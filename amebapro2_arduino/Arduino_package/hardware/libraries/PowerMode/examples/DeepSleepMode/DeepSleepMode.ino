@@ -20,8 +20,13 @@
     uint32_t PM_AONtimer_setting[2] = {CLOCK, SLEEP_DURATION};
     #define WAKUPE_SETTING  (uint32_t)(PM_AONtimer_setting)
 #elif (WAKEUP_SOURCE == 1)
-    // set wake up AON GPIO pin :   21 / 22
+#ifdef HUB8735_ULTRA
+    // set wake up AON GPIO pin :   9(PA_2) / 10(PA_3)
+    #define WAKUPE_SETTING  9
+#else
+    // set wake up AON GPIO pin :   21(PA_2) / 22(PA_3)
     #define WAKUPE_SETTING  21
+#endif
 #elif (WAKEUP_SOURCE == 2)
     // set wake up RTC alarm as 5 seconds
     #define ALARM_DAY       0

@@ -275,7 +275,7 @@ int HUB8735FatFS::setLastModTime(char *path, uint16_t year, uint16_t month, uint
 }
 
 
-void HUB8735FatFS::sd_upgrade(void){
+void HUB8735FatFS::sd_upgrade(int led){
     FIL m_file;
     //fatfs_sd_params_t fatfs_sd;
     flash_t flash;
@@ -292,7 +292,11 @@ void HUB8735FatFS::sd_upgrade(void){
 		printf("fatfs_sd_init fail (%d)\n", res);
 		goto fail;
 	}
-
+	
+	//LED flash
+	pinMode(LED_B, OUTPUT);
+	pinMode(LED_G, OUTPUT);
+	
 	printf("sd_upgrade enter\r\n");
 	//printf("[%s] fw_nam %s\r\n", __FUNCTION__, fw_name);
     //Get SD parameters
@@ -333,6 +337,17 @@ void HUB8735FatFS::sd_upgrade(void){
                 {
                 	presentage = (((i+1)*100)/block_max);
                 	printf("[%s] Erasing... %d%%\r\n",__FUNCTION__,presentage);
+                	if (presentage%2)
+                	{
+                	    digitalWrite(LED_B,1);
+                	    digitalWrite(LED_G,0);
+                	}
+                	else
+                	{
+                	    digitalWrite(LED_B,0);
+                	    digitalWrite(LED_G,1);	
+                	}
+                	    
                 }
             }
             //Write to flash
@@ -370,9 +385,21 @@ void HUB8735FatFS::sd_upgrade(void){
                 {
                 	presentage = (((i+1)*100)/w_num);
                 	printf("[%s] Upgrading.... %d%% \r\n",__FUNCTION__, presentage);
+                	if (presentage%2)
+                	{
+                	    digitalWrite(LED_B,1);
+                	    digitalWrite(LED_G,0);
+                	}
+                	else
+                	{
+                	    digitalWrite(LED_B,0);
+                	    digitalWrite(LED_G,1);	
+                	}
                 }
             }
             printf("[%s] Upgrade done\r\n",__FUNCTION__);
+            digitalWrite(LED_B,0);
+            digitalWrite(LED_G,0);
         	free(r_buf);
         }
         else
@@ -381,9 +408,16 @@ void HUB8735FatFS::sd_upgrade(void){
         }
         f_close(&m_file);
                 
-      
-        f_unlink(path);
-        printf("[%s] Delete file & Hold system, please reset board\r\n", __FUNCTION__);       
+        if (led)
+        {
+        	f_unlink(path);
+        	printf("[%s] Delete file & Hold system, please reset board\r\n", __FUNCTION__);
+        }
+        else
+        {
+        	printf("[%s] Hold system, please reset board\r\n", __FUNCTION__);
+        }
+               
         while(1);
     }
     
