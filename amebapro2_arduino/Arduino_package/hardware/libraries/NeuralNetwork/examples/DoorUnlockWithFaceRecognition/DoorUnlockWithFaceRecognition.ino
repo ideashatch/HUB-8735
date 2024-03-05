@@ -43,13 +43,13 @@
 #include <AmebaServo.h>
 #include "AmebaFatFS.h"
 
-#define CHANNELVID  0 // Channel for RTSP streaming
-#define CHANNELJPEG 1 // Channel for taking snapshots
-#define CHANNELNN   3 // RGB format video for NN only avaliable on channel 3
+#define CHANNELVID  0    // Channel for RTSP streaming
+#define CHANNELJPEG 1    // Channel for taking snapshots
+#define CHANNELNN   3    // RGB format video for NN only available on channel 3
 
 // Customised resolution for NN
-#define NNWIDTH     576
-#define NNHEIGHT    320
+#define NNWIDTH  576
+#define NNHEIGHT 320
 
 #ifdef HUB8735_ULTRA
 #define RED_LED                   LED_B
@@ -75,8 +75,8 @@ StreamIO videoStreamerFDFR(1, 1);
 StreamIO videoStreamerRGBFD(1, 1);
 AmebaServo myservo;
 
-char ssid[] = "Network_SSID";   // your network SSID (name)
-char pass[] = "Password";       // your network password
+char ssid[] = "Network_SSID";    // your network SSID (name)
+char pass[] = "Password";        // your network password
 int status = WL_IDLE_STATUS;
 
 bool doorOpen = false;
@@ -91,7 +91,8 @@ long counter = 0;
 // File Initialization
 AmebaFatFS fs;
 
-void setup() {
+void setup()
+{
     // GPIO Initialisation
     pinMode(RED_LED, OUTPUT);
     pinMode(GREEN_LED, OUTPUT);
@@ -161,11 +162,12 @@ void setup() {
     myservo.write(180);
 }
 
-void loop() {
-    backupButtonState  = digitalRead(BACKUP_FACE_BUTTON_PIN);
+void loop()
+{
+    backupButtonState = digitalRead(BACKUP_FACE_BUTTON_PIN);
     RegModeButtonState = digitalRead(EN_REGMODE_BUTTON_PIN);
 
-    if ((backupButtonState == HIGH) && (regMode == true)) { // Button is pressed when registration mode is on
+    if ((backupButtonState == HIGH) && (regMode == true)) {    // Button is pressed when registration mode is on
         for (int count = 0; count < 3; count++) {
             digitalWrite(RED_LED, HIGH);
             digitalWrite(GREEN_LED, HIGH);
@@ -174,8 +176,8 @@ void loop() {
             digitalWrite(GREEN_LED, LOW);
             delay(500);
         }
-        facerecog.backupRegisteredFace(); // back up registered faces to flash
-        regMode = false; // Off registration mode
+        facerecog.backupRegisteredFace();    // back up registered faces to flash
+        regMode = false;                     // Off registration mode
     }
 
     if (Serial.available() > 0) {
@@ -219,7 +221,7 @@ void loop() {
 
         delay(1000);
         Camera.getImage(CHANNELJPEG, &img_addr, &img_len);
-        file.write((uint8_t*)img_addr, img_len);
+        file.write((uint8_t *)img_addr, img_len);
         file.close();
         fs.end();
         myservo.write(0);
@@ -238,7 +240,8 @@ void loop() {
 }
 
 // User callback function for post processing of face recognition results
-void FRPostProcess(std::vector<FaceRecognitionResult> results) {
+void FRPostProcess(std::vector<FaceRecognitionResult> results)
+{
     uint16_t im_h = configVID.height();
     uint16_t im_w = configVID.width();
 
@@ -247,17 +250,17 @@ void FRPostProcess(std::vector<FaceRecognitionResult> results) {
 
     if (facerecog.getResultCount() > 0) {
         if (regMode == false) {
-            if (facerecog.getResultCount() > 1) { // Door remain close when more than one face detected
+            if (facerecog.getResultCount() > 1) {    // Door remain close when more than one face detected
                 doorOpen = false;
                 digitalWrite(RED_LED, HIGH);
                 digitalWrite(GREEN_LED, LOW);
             } else {
                 FaceRecognitionResult face = results[0];
-                if (String(face.name()) == String("unknown")) {  // Door remain close when unknown face detected
+                if (String(face.name()) == String("unknown")) {    // Door remain close when unknown face detected
                     doorOpen = false;
                     digitalWrite(RED_LED, HIGH);
                     digitalWrite(GREEN_LED, LOW);
-                } else { // Door open when a single registered face detected
+                } else {    // Door open when a single registered face detected
                     doorOpen = true;
                     digitalWrite(RED_LED, LOW);
                     digitalWrite(GREEN_LED, HIGH);
@@ -267,7 +270,7 @@ void FRPostProcess(std::vector<FaceRecognitionResult> results) {
         }
     }
 
-    for (uint32_t i = 0; i < facerecog.getResultCount(); i++) {
+    for (int i = 0; i < facerecog.getResultCount(); i++) {
         FaceRecognitionResult item = results[i];
         // Result coordinates are floats ranging from 0.00 to 1.00
         // Multiply with RTSP resolution to get coordinates in pixels

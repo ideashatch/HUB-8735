@@ -8,6 +8,7 @@ extern "C" {
 #include "md_drv.h"
 #include "md_api.h"
 #include "module_md.h"
+#include "module_eip.h"
 
 #ifdef __cplusplus
 }
@@ -16,34 +17,47 @@ extern "C" {
 std::vector<MotionDetectionResult> MotionDetection::md_result_vector;
 void (*MotionDetection::MD_user_CB)(std::vector<MotionDetectionResult>);
 
-MotionDetection::MotionDetection(uint8_t row, uint8_t col) {
-    md_param.image_width = 0;
-    md_param.image_height = 0;
-    md_param.md_row = 0;
-    md_param.md_col = 0;
+MotionDetection::MotionDetection(uint8_t row, uint8_t col)
+{
+    md_eip_param.image_width = 0;
+    md_eip_param.image_height = 0;
+    md_eip_param.eip_row = 0;
+    md_eip_param.eip_col = 0;
     configResolution(row, col);
 }
 
-MotionDetection::~MotionDetection(void) {
+MotionDetection::~MotionDetection(void)
+{
     end();
 }
 
-void MotionDetection::configResolution(uint8_t row, uint8_t col) {
-    if (row > MD_MAX_ROW) row = MD_MAX_ROW;
-    if (col > MD_MAX_COL) col = MD_MAX_COL;
-    if (row == 0) row = 1;
-    if (col == 0) col = 1;
+void MotionDetection::configResolution(uint8_t row, uint8_t col)
+{
+    if (row > MD_MAX_ROW) {
+        row = MD_MAX_ROW;
+    }
+    if (col > MD_MAX_COL) {
+        col = MD_MAX_COL;
+    }
+    if (row == 0) {
+        row = 1;
+    }
+    if (col == 0) {
+        col = 1;
+    }
 
-    md_param.md_row = row;
-    md_param.md_col = col;
+    md_eip_param.eip_row = row;
+    md_eip_param.eip_col = col;
 }
 
-void MotionDetection::configVideo(VideoSetting& config) {
-    md_param.image_width = config._w;
-    md_param.image_height = config._h;
+void MotionDetection::configVideo(VideoSetting& config)
+{
+    md_eip_param.image_width = config._w;
+    md_eip_param.image_height = config._h;
 }
 
-void MotionDetection::begin(void) {
+void MotionDetection::begin(void)
+{
     if (_p_mmf_context == NULL) {
         _p_mmf_context = MDInit();
     }
@@ -52,22 +66,24 @@ void MotionDetection::begin(void) {
         return;
     }
 
-    setMDParams(_p_mmf_context->priv, &md_param);
-    setMDDisppost(_p_mmf_context->priv, MDResultCallback);
-
+    setMDParams(_p_mmf_context, &md_eip_param);
+    setMDDisppost(_p_mmf_context, MDResultCallback);
     if (trigCount) {
-        setMDTrigBlock(_p_mmf_context->priv, trigCount);
-        md_control(_p_mmf_context->priv, CMD_MD_SET_OUTPUT, 1);
+        setMDTrigBlock(_p_mmf_context, trigCount);
+        mm_module_ctrl(_p_mmf_context, CMD_EIP_SET_MD_OUTPUT, 1);
         mm_module_ctrl(_p_mmf_context, MM_CMD_SET_QUEUE_LEN, 1);
         mm_module_ctrl(_p_mmf_context, MM_CMD_INIT_QUEUE_ITEMS, MMQI_FLAG_DYNAMIC);
     }
+    MDBegin(_p_mmf_context, 1);
+    setMDStatus(_p_mmf_context);
 }
 
-void MotionDetection::end(void) {
+void MotionDetection::end(void)
+{
     if (_p_mmf_context == NULL) {
         return;
     }
-    setMDDisppost(_p_mmf_context->priv, NULL);
+    setMDDisppost(_p_mmf_context, NULL);
     if (MDDeinit(_p_mmf_context) == NULL) {
         _p_mmf_context = NULL;
     } else {
@@ -75,60 +91,69 @@ void MotionDetection::end(void) {
     }
 }
 
-void MotionDetection::setTriggerBlockCount(uint16_t count) {
+void MotionDetection::setTriggerBlockCount(uint16_t count)
+{
     trigCount = count;
     if (_p_mmf_context == NULL) {
         return;
     }
-    setMDTrigBlock(_p_mmf_context->priv, count);
+    setMDTrigBlock(_p_mmf_context, count);
 }
 
-void MotionDetection::setDetectionMask(char* mask) {
+void MotionDetection::setDetectionMask(char* mask)
+{
     if (_p_mmf_context == NULL) {
         return;
     }
-    setMDMask(_p_mmf_context->priv, mask);
+    setMDMask(_p_mmf_context, mask);
 }
 
-void MotionDetection::setResultCallback(void (*md_callback)(std::vector<MotionDetectionResult>)) {
+void MotionDetection::setResultCallback(void (*md_callback)(std::vector<MotionDetectionResult>))
+{
     MD_user_CB = md_callback;
 }
 
-uint16_t MotionDetection::getResultCount(void) {
+uint16_t MotionDetection::getResultCount(void)
+{
     uint16_t md_res_count = md_result_vector.size();
-    
+
     if (md_res_count >= 5) {
         md_res_count = 4;
     }
     return md_res_count;
 }
 
-MotionDetectionResult MotionDetection::getResult(uint16_t index) {
+MotionDetectionResult MotionDetection::getResult(uint16_t index)
+{
     if (index >= md_result_vector.size()) {
         return MotionDetectionResult();
     }
     return md_result_vector[index];
 }
 
-std::vector<MotionDetectionResult> MotionDetection::getResult(void) {
+std::vector<MotionDetectionResult> MotionDetection::getResult(void)
+{
     return md_result_vector;
 }
 
-uint8_t MotionDetection::rows(void) {
-    return md_param.md_row;
+uint8_t MotionDetection::rows(void)
+{
+    return md_eip_param.eip_row;
 }
 
-uint8_t MotionDetection::cols(void) {
-    return md_param.md_col;
+uint8_t MotionDetection::cols(void)
+{
+    return md_eip_param.eip_col;
 }
 
-void MotionDetection::MDResultCallback(md_result_t *result) {
+void MotionDetection::MDResultCallback(md_result_t* result)
+{
     if (result == NULL) {
         return;
     }
     md_result_vector.clear();
     md_result_vector.resize((size_t)result->motion_cnt);
-    
+
     for (int i = 0; i < result->motion_cnt; i++) {
         memcpy(&(md_result_vector[i].md_position), &(result->md_pos[i]), sizeof(md_pos_t));
     }
@@ -138,19 +163,23 @@ void MotionDetection::MDResultCallback(md_result_t *result) {
     }
 }
 
-float MotionDetectionResult::xMin(void) {
+float MotionDetectionResult::xMin(void)
+{
     return md_position.xmin;
 }
 
-float MotionDetectionResult::xMax(void) {
+float MotionDetectionResult::xMax(void)
+{
     return md_position.xmax;
 }
 
-float MotionDetectionResult::yMin(void) {
+float MotionDetectionResult::yMin(void)
+{
     return md_position.ymin;
 }
 
-float MotionDetectionResult::yMax(void) {
+float MotionDetectionResult::yMax(void)
+{
     return md_position.ymax;
 }
 

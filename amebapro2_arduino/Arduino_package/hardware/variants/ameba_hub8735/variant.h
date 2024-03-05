@@ -117,12 +117,12 @@ extern void wait_for_debug(void);
 #define SPI1_SS                                 AMB_D7  // SPI_1_CS0v   AMB_D3
 
 /* TwoWire/I2C pin mapping */
-#define I2C_SDA                                 AMB_D0 // I2C2_SDA     AMB_D12
-#define I2C_SCL                                 AMB_D0 // I2C2_SCL     AMB_D13
-#define I2C1_SDA                                AMB_D28  // I2C1_SDA     AMB_D9
-#define I2C1_SCL                                AMB_D27 // I2C1_SCL     AMB_D10
-#define I2C2_SDA                                AMB_D2 // I2C0_SDA     AMB_D27
-#define I2C2_SCL                                AMB_D3 // I2C0_SCL     AMB_D28
+#define I2C_SDA                                 AMB_D2 // I2C0_SDA     AMB_D2
+#define I2C_SCL                                 AMB_D3 // I2C0_SCL     AMB_D3
+#define I2C1_SDA                                AMB_D28  // I2C1_SDA     AMB_D28
+#define I2C1_SCL                                AMB_D27 // I2C1_SCL     AMB_D127
+#define I2C2_SDA                                AMB_D2 // I2C2_SDA     AMB_D12
+#define I2C2_SCL                                AMB_D3 // I2C2_SCL     AMB_D13
 
 /* IR Device pin mapping */
 //#define IR_TX

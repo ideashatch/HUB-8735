@@ -23,17 +23,18 @@ AAC encoder;
 AAD decoder;
 RTSP rtsp;
 RTP rtp;
-StreamIO audioStreamer0(1, 1);   // 1 Input Audio -> 1 Output AAC
-StreamIO audioStreamer1(1, 1);   // 1 Input Audio -> 1 Output AAC
-StreamIO audioStreamer2(1, 1);   // 1 Input Audio -> 1 Output AAC
-StreamIO audioStreamer3(1, 1);   // 1 Input Audio -> 1 Output AAC
+StreamIO audioStreamer0(1, 1);    // 1 Input Audio -> 1 Output AAC
+StreamIO audioStreamer1(1, 1);    // 1 Input Audio -> 1 Output AAC
+StreamIO audioStreamer2(1, 1);    // 1 Input Audio -> 1 Output AAC
+StreamIO audioStreamer3(1, 1);    // 1 Input Audio -> 1 Output AAC
 
-char ssid[] = "yourNetwork";    // your network SSID (name)
-char pass[] = "Password";       // your network password
+char ssid[] = "Network_SSID";    // your network SSID (name)
+char pass[] = "Password";        // your network password
 int status = WL_IDLE_STATUS;
 uint16_t value;
 
-void setup() {
+void setup()
+{
     Serial.begin(115200);
 
     while (status != WL_CONNECTED) {
@@ -42,7 +43,7 @@ void setup() {
     }
 
     audio.configAudio(configA);
-    audio.configMicAEC(1);      // Enable echo cancellation to remove audio feedback from RTP stream
+    audio.configMicAEC(1);    // Enable echo cancellation to remove audio feedback from RTP stream
     audio.begin();
 
     encoder.configAudio(configA);
@@ -66,6 +67,7 @@ void setup() {
 
     audioStreamer2.registerInput(rtp);
     audioStreamer2.registerOutput(decoder);
+    audioStreamer2.setStackSize();
     audioStreamer2.begin();
 
     audioStreamer3.registerInput(decoder);
@@ -73,5 +75,6 @@ void setup() {
     audioStreamer3.begin();
 }
 
-void loop() {
+void loop()
+{
 }

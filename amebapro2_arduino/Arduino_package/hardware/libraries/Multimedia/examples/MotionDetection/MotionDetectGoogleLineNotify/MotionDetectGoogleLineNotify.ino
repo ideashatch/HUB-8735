@@ -5,7 +5,7 @@
    Line Notify to the user's mobile phone, ensuring swift response and
    heightened security.
 
-    Example guide: https://www.amebaiot.com/zh/amebapro2-arduino-motion-notify/
+    Example guide: https://www.amebaiot.com/en/amebapro2-arduino-motion-notify/
 */
 
 #include <Arduino.h>
@@ -19,26 +19,26 @@
 #include "Base64.h"
 
 // User Configuration
-#define CHANNEL     0           // Video channel for streaming & snapshot
-#define CHANNELMD   3           // RGB format video for motion detection only avaliable on channel 3
-#define FILENAME    "image.jpg" // Save as jpg image in SD Card
+#define CHANNEL   0              // Video channel for streaming & snapshot
+#define CHANNELMD 3              // RGB format video for motion detection only available on channel 3
+#define FILENAME  "image.jpg"    // Save as jpg image in SD Card
 
 // Enter your Google Script and Line Notify details
-String myScript = "/macros/s/****************************************/exec";  // Create your Google Apps Script and replace the "myScript" path.
-String myFoldername = "&myFoldername=AMB82";  // Set the Google Drive folder name to store your file
-String myFilename = "&myFilename=image.jpg";  // Set the Google Drive file name to store your data
+String myScript = "/macros/s/****************************************/exec";    // Create your Google Apps Script and replace the "myScript" path.
+String myFoldername = "&myFoldername=AMB82";                                    // Set the Google Drive folder name to store your file
+String myFilename = "&myFilename=image.jpg";                                    // Set the Google Drive file name to store your data
 String myImage = "&myFile=";
 
-char ssid[] = "Network_SSID";  // your network SSID (name)
-char pass[] = "Password";      // your network password
+char ssid[] = "Network_SSID";    // your network SSID (name)
+char pass[] = "Password";        // your network password
 int status = WL_IDLE_STATUS;
 
 uint32_t img_addr = 0;
 uint32_t img_len = 0;
 
 // Create objects
-VideoSetting config(VIDEO_D1, CAM_FPS, VIDEO_H264_JPEG, 1);  // High resolution video for streaming
-VideoSetting configMD(VIDEO_VGA, 10, VIDEO_RGB, 0);  // Low resolution RGB video for motion detection
+VideoSetting config(VIDEO_D1, CAM_FPS, VIDEO_H264_JPEG, 1);    // High resolution video for streaming
+VideoSetting configMD(VIDEO_VGA, 10, VIDEO_RGB, 0);            // Low resolution RGB video for motion detection
 RTSP rtsp;
 StreamIO videoStreamer(1, 1);
 StreamIO videoStreamerMD(1, 1);
@@ -46,12 +46,38 @@ MotionDetection MD;
 AmebaFatFS fs;
 WiFiSSLClient wifiClient;
 
-int counter = 0;
 char buf[512];
 char *p;
 bool flag_motion = false;
 
-void setup() {
+void mdPostProcess(std::vector<MotionDetectionResult> md_results)
+{
+    // Motion detection results is expressed as an array
+    // With 0 or 1 in each element indicating presence of motion
+    // Iterate through all elements to check for motion
+    // and calculate rectangles containing motion
+
+    OSD.createBitmap(CHANNEL);
+    if (MD.getResultCount() > 0) {
+        for (uint16_t i = 0; i < MD.getResultCount(); i++) {
+            MotionDetectionResult result = md_results[i];
+            int xmin = (int)(result.xMin() * config.width());
+            int xmax = (int)(result.xMax() * config.width());
+            int ymin = (int)(result.yMin() * config.height());
+            int ymax = (int)(result.yMax() * config.height());
+            // printf("%d:\t%d %d %d %d\n\r", i, xmin, xmax, ymin, ymax);
+            OSD.drawRect(CHANNEL, xmin, ymin, xmax, ymax, 3, COLOR_GREEN);
+        }
+        flag_motion = true;
+    } else {
+        flag_motion = false;
+    }
+    OSD.update(CHANNEL);
+    delay(100);
+}
+
+void setup()
+{
     Serial.begin(115200);
 
     // attempt to connect to Wifi network:
@@ -77,6 +103,7 @@ void setup() {
 
     // Configure motion detection for low resolution RGB video stream
     MD.configVideo(configMD);
+    MD.setResultCallback(mdPostProcess);
     MD.begin();
 
     // Configure StreamIO object to stream data from high res video channel to RTSP
@@ -111,33 +138,8 @@ void setup() {
     delay(2000);
 }
 
-void loop() {
-    // Motion detection results is expressed as an array
-    // With 0 or 1 in each element indicating presence of motion
-    // Iterate through all elements to check for motion
-    // and calculate rectangles containing motion
-    std::vector<MotionDetectionResult> md_results = MD.getResult();
-    OSD.createBitmap(CHANNEL);
-
-    if (MD.getResultCount() > 0) {
-        counter++;
-        for (uint16_t i = 0; i < MD.getResultCount(); i++) {
-            MotionDetectionResult result = md_results[i];
-            int xmin = (int)(result.xMin() * config.width());
-            int xmax = (int)(result.xMax() * config.width());
-            int ymin = (int)(result.yMin() * config.height());
-            int ymax = (int)(result.yMax() * config.height());
-            // printf("%d:\t%d %d %d %d\n\r", i, xmin, xmax, ymin, ymax);
-            OSD.drawRect(CHANNEL, xmin, ymin, xmax, ymax, 3, COLOR_GREEN);
-        }
-        if (counter >= 5) {
-            flag_motion = true;
-        }
-    } else {
-        counter = 0;
-        flag_motion = false;
-    }
-
+void loop()
+{
     if (flag_motion) {
         Serial.println("Motion Detected");
         // SD card init
@@ -149,7 +151,8 @@ void loop() {
             Serial.println("================================");
             Serial.println("[ERROR] SD Card Mount Failed !!!");
             Serial.println("================================");
-            while(1);
+            while (1)
+                ;
         }
 
         // List root directory and put results in buf
@@ -174,9 +177,7 @@ void loop() {
         Camera.getImage(CHANNEL, &img_addr, &img_len);
         file.write((uint8_t *)img_addr, img_len);
         file.close();
-        // upadte OSD
-        OSD.update(CHANNEL);
-        delay(100);
+
         Serial.println("===================================");
         Serial.println("[INFO] Photo Captured ...");
         Serial.println("===================================");
@@ -187,7 +188,8 @@ void loop() {
         while (strlen(p) > 0) {
             /* list out file name image will be saved as "image.jpg" */
             if (strstr(p, FILENAME) != NULL) {
-                Serial.println("Found 'image.jpg' in the string.");
+                Serial.println("[INFO] Found 'image.jpg' in the string.");
+                Serial.println("[INFO] Processing file...");
             } else {
                 // Serial.println("Substring 'image.jpg' not found in the
                 // string.");
@@ -216,13 +218,14 @@ void loop() {
 
         // transfer file to Google Drive
         // https://github.com/fustyles/Arduino/tree/master/ESP32-CAM_GoogleDrive_Linenotify
+        Serial.println("[INFO] Uploading file to Google Drive...");
         String Data = myFoldername + myFilename + myImage;
         const char *myDomain = "script.google.com";
         String getAll = "", getBody = "";
-        Serial.println("Connect to " + String(myDomain));
+        Serial.println("[INFO] Connect to " + String(myDomain));
 
         if (wifiClient.connect(myDomain, 443)) {
-            Serial.println("Connection successful");
+            Serial.println("[INFO] Connection successful");
 
             wifiClient.println("POST " + myScript + " HTTP/1.1");
             wifiClient.println("Host: " + String(myDomain));
@@ -236,7 +239,7 @@ void loop() {
                 wifiClient.print(imageFile.substring(Index, Index + 1000));
             }
 
-            int waitTime = 10000;  // timeout 10 seconds
+            int waitTime = 10000;    // timeout 10 seconds
             unsigned int startTime = millis();
             boolean state = false;
 
@@ -266,24 +269,23 @@ void loop() {
             Serial.println(getBody);
         } else {
             getBody = "Connected to " + String(myDomain) + " failed.";
-            Serial.println("Connected to " + String(myDomain) + " failed.");
+            Serial.println("[INFO] Connected to " + String(myDomain) + " failed.");
         }
-        Serial.println("File uploading done.");
+        Serial.println("[INFO] File uploading done.");
         Serial.println("===================================");
-    } else {  // no motion detected
+    } else {    // no motion detected
         Serial.print(".");
     }
 }
 
 // https://www.arduino.cc/reference/en/libraries/urlencode/
-String urlencode(String str) {
+String urlencode(String str)
+{
     const char *msg = str.c_str();
     const char *hex = "0123456789ABCDEF";
     String encodedMsg = "";
     while (*msg != '\0') {
-        if (('a' <= *msg && *msg <= 'z') || ('A' <= *msg && *msg <= 'Z') ||
-            ('0' <= *msg && *msg <= '9') || *msg == '-' || *msg == '_' ||
-            *msg == '.' || *msg == '~') {
+        if (('a' <= *msg && *msg <= 'z') || ('A' <= *msg && *msg <= 'Z') || ('0' <= *msg && *msg <= '9') || *msg == '-' || *msg == '_' || *msg == '.' || *msg == '~') {
             encodedMsg += *msg;
         } else {
             encodedMsg += '%';
@@ -295,7 +297,8 @@ String urlencode(String str) {
     return encodedMsg;
 }
 
-void CamFlash() {
+void CamFlash()
+{
     pinMode(LED_G, OUTPUT);
     for (int i = 0; i < 5; i++) {
         digitalWrite(LED_G, HIGH);
@@ -305,7 +308,8 @@ void CamFlash() {
     }
 }
 
-void WiFiCon() {
+void WiFiCon()
+{
     pinMode(LED_B, OUTPUT);
     for (int i = 0; i < 2; i++) {
         digitalWrite(LED_B, HIGH);
@@ -315,12 +319,13 @@ void WiFiCon() {
     }
 }
 
-void StreamEnd() {
-    videoStreamer.pause();  // pause linkers
+void StreamEnd()
+{
+    videoStreamer.pause();    // pause linkers
     videoStreamerMD.pause();
-    rtsp.end();            // stop RTSP chaneel/module
-    Camera.channelEnd();   // stop camera channel/module
-    MD.end();              // close module
-    Camera.videoDeinit();  // video deinit
+    rtsp.end();              // stop RTSP chaneel/module
+    Camera.channelEnd();     // stop camera channel/module
+    MD.end();                // close module
+    Camera.videoDeinit();    // video deinit
     delay(1000);
 }

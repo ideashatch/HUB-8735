@@ -3,6 +3,7 @@ menu.EraseFlash=* Erase All Flash Memory (16MB)
 menu.AutoUploadMode=* Auto Flash Mode
 menu.StdLibInit=* Standard Lib
 menu.UploadSpeed=* Upload Speed
+#menu.LoadNNModelSource=* NN Model Load From
 
 
 
@@ -21,9 +22,10 @@ Ameba_HUB-8735.build.f_cpu=500000000L
 Ameba_HUB-8735.build.usb_product="HUB-8735"
 Ameba_HUB-8735.build.board=AMEBA
 Ameba_HUB-8735.build.core=ambpro2
-Ameba_HUB-8735.build.extra_flags=-DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags}
+Ameba_HUB-8735.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 -DArduino_LOAD_MODEL_FLASH {build.usb_flags}
 Ameba_HUB-8735.build.ldscript=linker_scripts/gcc/amebapro2_ram_arduino.ld
 Ameba_HUB-8735.build.variant=ameba_hub8735
+Ameba_HUB-8735.build.menu_flags={build.Arduino_STD_PRINTF_flags} {build.Arduino_LOAD_MODEL_flags}
 
 Ameba_HUB-8735.upload.tool=ameba_pro2_tools
 Ameba_HUB-8735.upload.protocol=usb_serial
@@ -47,18 +49,22 @@ Ameba_HUB-8735.menu.AutoUploadMode.Disable.build.auto_upload_mode=Disable
 Ameba_HUB-8735.menu.AutoUploadMode.Enable=Enable
 Ameba_HUB-8735.menu.AutoUploadMode.Enable.build.auto_upload_mode=Enable
 
-Ameba_HUB-8735.menu.StdLibInit.Disable=Disable
-Ameba_HUB-8735.menu.StdLibInit.Disable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags}
 Ameba_HUB-8735.menu.StdLibInit.Enable=Arduino_STD_PRINTF
-Ameba_HUB-8735.menu.StdLibInit.Enable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags} -DArduino_STD_PRINTF
+Ameba_HUB-8735.menu.StdLibInit.Enable.build.Arduino_STD_PRINTF_flags=-DArduino_STD_PRINTF
+Ameba_HUB-8735.menu.StdLibInit.Disable=Disable
+Ameba_HUB-8735.menu.StdLibInit.Disable.build.Arduino_STD_PRINTF_flags=
 
-
-Ameba_HUB-8735.menu.UploadSpeed.Speed=921600
-Ameba_HUB-8735.menu.UploadSpeed.Speed.build.upload_speed=921600
 Ameba_HUB-8735.menu.UploadSpeed.Speed2M=2000000
 Ameba_HUB-8735.menu.UploadSpeed.Speed2M.build.upload_speed=2000000
+Ameba_HUB-8735.menu.UploadSpeed.Speed=921600
+Ameba_HUB-8735.menu.UploadSpeed.Speed.build.upload_speed=921600
 Ameba_HUB-8735.menu.UploadSpeed.Speed230400=230400
 Ameba_HUB-8735.menu.UploadSpeed.Speed230400.build.upload_speed=230400
+
+#Ameba_HUB-8735.menu.LoadNNModelSource.flash=Flash
+#Ameba_HUB-8735.menu.LoadNNModelSource.flash.build.Arduino_LOAD_MODEL_flags=-DArduino_LOAD_MODEL_FLASH
+#Ameba_HUB-8735.menu.LoadNNModelSource.sd=SD Card
+#Ameba_HUB-8735.menu.LoadNNModelSource.sd.build.Arduino_LOAD_MODEL_flags=-DArduino_LOAD_MODEL_SD
 ##############################################################
 Ameba_HUB-8735_ultra.name=HUB-8735_ultra
 #Ameba_HUB-8735_ultra.vid.0=0x1A86
@@ -70,9 +76,10 @@ Ameba_HUB-8735_ultra.build.f_cpu=500000000L
 Ameba_HUB-8735_ultra.build.usb_product="HUB-8735_ultra"
 Ameba_HUB-8735_ultra.build.board=AMEBA
 Ameba_HUB-8735_ultra.build.core=ambpro2
-Ameba_HUB-8735_ultra.build.extra_flags=-DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 -DBOARD_AMB82_HUB8735_ULTRA {build.usb_flags}
+Ameba_HUB-8735_ultra.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 -DBOARD_AMB82_HUB8735_ULTRA -DArduino_LOAD_MODEL_FLASH {build.usb_flags}
 Ameba_HUB-8735_ultra.build.ldscript=linker_scripts/gcc/amebapro2_ram_arduino.ld
 Ameba_HUB-8735_ultra.build.variant=ameba_hub8735_ultra
+Ameba_HUB-8735_ultra.build.menu_flags={build.Arduino_STD_PRINTF_flags} {build.Arduino_LOAD_MODEL_flags}
 
 Ameba_HUB-8735_ultra.upload.tool=ameba_pro2_tools
 Ameba_HUB-8735_ultra.upload.protocol=usb_serial
@@ -96,10 +103,10 @@ Ameba_HUB-8735_ultra.menu.AutoUploadMode.Disable.build.auto_upload_mode=Disable
 Ameba_HUB-8735_ultra.menu.AutoUploadMode.Enable=Enable
 Ameba_HUB-8735_ultra.menu.AutoUploadMode.Enable.build.auto_upload_mode=Enable
 
-Ameba_HUB-8735_ultra.menu.StdLibInit.Disable=Disable
-Ameba_HUB-8735_ultra.menu.StdLibInit.Disable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags}
 Ameba_HUB-8735_ultra.menu.StdLibInit.Enable=Arduino_STD_PRINTF
-Ameba_HUB-8735_ultra.menu.StdLibInit.Enable.build.extra_flags=-DARDUINO_SDK -DARDUINO_AMBPRO2 -DBOARD_AMB82_HUB8735 {build.usb_flags} -DArduino_STD_PRINTF
+Ameba_HUB-8735_ultra.menu.StdLibInit.Enable.build.Arduino_STD_PRINTF_flags=-DArduino_STD_PRINTF
+Ameba_HUB-8735_ultra.menu.StdLibInit.Disable=Disable
+Ameba_HUB-8735_ultra.menu.StdLibInit.Disable.build.Arduino_STD_PRINTF_flags=
 
 Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed2M=2000000
 Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed2M.build.upload_speed=2000000
@@ -107,4 +114,10 @@ Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed=921600
 Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed.build.upload_speed=921600
 Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed230400=230400
 Ameba_HUB-8735_ultra.menu.UploadSpeed.Speed230400.build.upload_speed=230400
+
+#Ameba_HUB-8735_ultra.menu.LoadNNModelSource.flash=Flash
+#Ameba_HUB-8735_ultra.menu.LoadNNModelSource.flash.build.Arduino_LOAD_MODEL_flags=-DArduino_LOAD_MODEL_FLASH
+#Ameba_HUB-8735_ultra.menu.LoadNNModelSource.sd=SD Card
+#Ameba_HUB-8735_ultra.menu.LoadNNModelSource.sd.build.Arduino_LOAD_MODEL_flags=-DArduino_LOAD_MODEL_SD
+
 ##############################################################

@@ -12,197 +12,318 @@
 #include "SPI.h"
 #include "Arduino.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include "device.h"
-#include "diag.h"
-#include "main.h"
-#include "spi_api.h"
-#include "spi_ex_api.h"
-
-
-#ifdef __cplusplus
-}
-#endif
-
 spi_t spi_obj0;
 spi_t spi_obj1;
 
-SPIClass::SPIClass(void *pSpiObj, int mosi, int miso, int clk, int ss)
+SPIClass::SPIClass(spi_t *pSpiObj, int mosi_pin, int miso_pin, int clk_pin, int ss_pin)
 {
     pSpiMaster = pSpiObj;
+    pSpiSlave = pSpiObj;
 
     /* These 4 pins should belong same spi pinmux*/
-    pinMOSI = mosi;
-    pinMISO = miso;
-    pinCLK = clk;
-    pinSS = ss;
+    _pinMOSI = mosi_pin;
+    _pinMISO = miso_pin;
+    _pinCLK = clk_pin;
+    _pinSS = ss_pin;
 
-    pinUserSS = -1;
-    defaultFrequency = SPI_DEFAULT_FREQ;
+    initStatus = false;
+    _dataBits = 8;                 // default databits is 8 bits
+    _dataMode = SPI_DATA_MODE0;    // default datamode is mode 0
+    _defaultFrequency = SPI_DEFAULT_FREQ;
+    // _pinUserSS = -1;
+
+    _SPI_Mode = SPI_MODE_MASTER;
 }
 
 void SPIClass::begin(void)
 {
-    spi_init(
-        (spi_t *)pSpiMaster,
-        (PinName)g_APinDescription[pinMOSI].pinname, 
-        (PinName)g_APinDescription[pinMISO].pinname, 
-        (PinName)g_APinDescription[pinCLK].pinname, 
-        (PinName)g_APinDescription[pinSS].pinname
-    );
-    spi_format((spi_t *)pSpiMaster, 8, 0, 0);
-    spi_frequency((spi_t *)pSpiMaster, defaultFrequency);
-}
+    amb_ard_pin_check_fun(_pinMOSI, PIO_SPI);
+    amb_ard_pin_check_fun(_pinMISO, PIO_SPI);
+    amb_ard_pin_check_fun(_pinCLK, PIO_SPI);
+    amb_ard_pin_check_fun(_pinSS, PIO_SPI);
 
-void SPIClass::begin(int ss)
-{
-    pinSS = (PinName)g_APinDescription[ss].pinname;
+    _pinMOSI = (PinName)g_APinDescription[_pinMOSI].pinname;
+    _pinMISO = (PinName)g_APinDescription[_pinMISO].pinname;
+    _pinCLK = (PinName)g_APinDescription[_pinCLK].pinname;
+    _pinSS = (PinName)g_APinDescription[_pinSS].pinname;
 
     spi_init(
-        (spi_t *)pSpiMaster,
-        (PinName)g_APinDescription[pinMOSI].pinname, 
-        (PinName)g_APinDescription[pinMISO].pinname, 
-        (PinName)g_APinDescription[pinCLK].pinname, 
-        (PinName)g_APinDescription[pinSS].pinname
-    );
-    spi_format((spi_t *)pSpiMaster, 8, 0, 0);
-    spi_frequency((spi_t *)pSpiMaster, defaultFrequency);
+        pSpiMaster,
+        (PinName)(_pinMOSI),
+        (PinName)(_pinMISO),
+        (PinName)(_pinCLK),
+        (PinName)(_pinSS));
+    spi_format(pSpiMaster, _dataBits, _dataMode, 0);
+    spi_frequency(pSpiMaster, _defaultFrequency);
+
+    // Mark SPI init status
+    initStatus = true;
 }
 
-void SPIClass::beginTransaction(uint8_t pin, SPISettings settings)
+void SPIClass::begin(int ss_pin)
 {
-    bitOrder = settings._bitOrder;
-    spi_format((spi_t *)pSpiMaster, 8, settings._dataMode, 0);
-    spi_frequency((spi_t *)pSpiMaster, settings._clock);
+    _pinSS = ss_pin;
 
-    pinUserSS = pin;
-    pinMode(pinUserSS, OUTPUT);
-    digitalWrite(pinUserSS, 0);
+    amb_ard_pin_check_fun(_pinMOSI, PIO_SPI);
+    amb_ard_pin_check_fun(_pinMISO, PIO_SPI);
+    amb_ard_pin_check_fun(_pinCLK, PIO_SPI);
+    amb_ard_pin_check_fun(_pinSS, PIO_SPI);
+
+    _pinMOSI = (PinName)g_APinDescription[_pinMOSI].pinname;
+    _pinMISO = (PinName)g_APinDescription[_pinMISO].pinname;
+    _pinCLK = (PinName)g_APinDescription[_pinCLK].pinname;
+    _pinSS = (PinName)g_APinDescription[_pinSS].pinname;
+
+    spi_init(
+        pSpiMaster,
+        (PinName)(_pinMOSI),
+        (PinName)(_pinMISO),
+        (PinName)(_pinCLK),
+        (PinName)(_pinSS));
+    spi_format(pSpiMaster, _dataBits, _dataMode, 0);
+    spi_frequency(pSpiMaster, _defaultFrequency);
+
+    // Mark SPI init status
+    initStatus = true;
+}
+
+void SPIClass::begin(char SPI_mode)
+{
+    _SPI_Mode = SPI_mode;
+    if (_SPI_Mode == SPI_MODE_MASTER) {
+        begin();
+    } else if (_SPI_Mode == SPI_MODE_SLAVE) {
+        amb_ard_pin_check_fun(_pinMOSI, PIO_SPI);
+        amb_ard_pin_check_fun(_pinMISO, PIO_SPI);
+        amb_ard_pin_check_fun(_pinCLK, PIO_SPI);
+        amb_ard_pin_check_fun(_pinSS, PIO_SPI);
+
+        _pinMOSI = (PinName)g_APinDescription[_pinMOSI].pinname;
+        _pinMISO = (PinName)g_APinDescription[_pinMISO].pinname;
+        _pinCLK = (PinName)g_APinDescription[_pinCLK].pinname;
+        _pinSS = (PinName)g_APinDescription[_pinSS].pinname;
+
+        spi_init(
+            pSpiSlave,
+            (PinName)(_pinMOSI),
+            (PinName)(_pinMISO),
+            (PinName)(_pinCLK),
+            (PinName)(_pinSS));
+        spi_format(pSpiSlave, _dataBits, _dataMode, 1);
+
+        // Mark SPI init status
+        initStatus = true;
+    } else {
+        printf("\r\n[ERROR] SPI begin: SPI mode \n");
+        return;
+    }
+}
+
+void SPIClass::begin(int ss_pin, char SPI_mode)
+{
+    _SPI_Mode = SPI_mode;
+    if (_SPI_Mode == SPI_MODE_MASTER) {
+        begin(ss_pin);
+    } else if (_SPI_Mode == SPI_MODE_SLAVE) {
+        _pinSS = ss_pin;
+
+        amb_ard_pin_check_fun(_pinMOSI, PIO_SPI);
+        amb_ard_pin_check_fun(_pinMISO, PIO_SPI);
+        amb_ard_pin_check_fun(_pinCLK, PIO_SPI);
+        amb_ard_pin_check_fun(_pinSS, PIO_SPI);
+
+        _pinMOSI = (PinName)g_APinDescription[_pinMOSI].pinname;
+        _pinMISO = (PinName)g_APinDescription[_pinMISO].pinname;
+        _pinCLK = (PinName)g_APinDescription[_pinCLK].pinname;
+        _pinSS = (PinName)g_APinDescription[_pinSS].pinname;
+
+        spi_init(
+            pSpiSlave,
+            (PinName)(_pinMOSI),
+            (PinName)(_pinMISO),
+            (PinName)(_pinCLK),
+            (PinName)(_pinSS));
+        spi_format(pSpiSlave, _dataBits, _dataMode, 1);
+
+        // Mark SPI init status
+        initStatus = true;
+    } else {
+        printf("\r\n[ERROR] SPI begin: SPI mode \n");
+        return;
+    }
+}
+
+void SPIClass::beginTransaction(uint8_t ss_pin, SPISettings settings)
+{
+    _bitOrder = settings._bitOrderSetting;
+
+#if 0
+    spi_free(pSpiMaster);
+    spi_init(
+        pSpiMaster,
+        (PinName)g_APinDescription[_pinMOSI].pinname, 
+        (PinName)g_APinDescription[_pinMISO].pinname, 
+        (PinName)g_APinDescription[_pinCLK].pinname, 
+        (PinName)g_APinDescription[_pinSS].pinname
+    );
+    spi_format(pSpiMaster, 8, settings._settingdataMode, 0);
+#else
+    phal_ssi_adaptor_t phal_ssi_adaptor = &(pSpiMaster->hal_ssi_adaptor);
+    hal_spi_format(phal_ssi_adaptor, (8 - 1), settings._dataModeSetting);
+#endif
+
+    spi_frequency(pSpiMaster, settings._clockSetting);
 }
 
 void SPIClass::beginTransaction(SPISettings settings)
 {
-    beginTransaction(pinSS, settings);
+    beginTransaction(_pinSS, settings);
 }
 
 void SPIClass::endTransaction(void)
 {
-    if (pinUserSS >= 0) {
-        digitalWrite(pinUserSS, 1);
-        pinUserSS = -1;
-    }
+    // if (_pinUserSS >= 0) {
+    //     digitalWrite(_pinUserSS, 1);
+    //     _pinUserSS = -1;
+    // }
 }
 
-byte SPIClass::transfer(uint8_t _data, SPITransferMode _mode){ // transfer 1 byte data without SS
-    (void)_mode;
-    
-    spi_master_write((spi_t *)pSpiMaster, _data);
-    //printf("Master write: %02X\n\r", _data);
+byte SPIClass::transfer(uint8_t data, SPITransferMode mode)
+{    // transfer 1 byte data without SS
+    (void)mode;
+    spi_master_write(pSpiMaster, data);
+    // printf("\r\n[INFO] Master write: %02X\n", _data);
     return 0;
 }
 
-byte SPIClass::transfer(byte _pin, uint8_t _data, SPITransferMode _mode){ // transfer 1 byte data with SS
-
-    if (_pin != pinSS) {
-        pinMode(_pin, OUTPUT);
-        digitalWrite(_pin, 0);
+byte SPIClass::transfer(byte pin, uint8_t data, SPITransferMode mode)
+{    // transfer 1 byte data with SS
+    if (pin != _pinSS) {
+        pinMode(pin, OUTPUT);
+        digitalWrite(pin, 0);
     }
-    spi_master_write((spi_t *)pSpiMaster, _data);
-    //printf("Master write: %02X\n\r", _data);
-    
+    spi_master_write(pSpiMaster, data);
+    // printf("\r\n[INFO] Master write: %02X\n", _data);
+
     return 0;
 }
 
-void SPIClass::transfer(byte _pin, void *_buf, SIZE_T _count, SPITransferMode _mode)
+void SPIClass::transfer(byte pin, void *buf, SIZE_T count, SPITransferMode mode)
 {
-    if (_pin != pinSS) {
-        pinMode(_pin, OUTPUT);
-        digitalWrite(_pin, 0);
+    if (pin != _pinSS) {
+        pinMode(pin, OUTPUT);
+        digitalWrite(pin, 0);
     }
 
-    spi_master_write_read_stream((spi_t *)pSpiMaster, (char *)_buf, (char *)_buf, (uint32_t)_count);
+    spi_master_write_read_stream(pSpiMaster, (char *)buf, (char *)buf, (uint32_t)count);
 
-    if ((_pin != pinSS) && (_mode == SPI_LAST)) {
-        digitalWrite(_pin, 1);
+    if ((pin != _pinSS) && (mode == SPI_LAST)) {
+        digitalWrite(pin, 1);
     }
 }
 
-void SPIClass::transfer(void *_buf, SIZE_T _count, SPITransferMode _mode)
+void SPIClass::transfer(void *buf, SIZE_T count, SPITransferMode mode)
 {
-    transfer(pinSS, _buf, _count, _mode);
+    transfer(_pinSS, buf, count, mode);
 }
 
-uint16_t SPIClass::transfer16(byte _pin, uint16_t _data, SPITransferMode _mode)
+uint16_t SPIClass::transfer16(byte pin, uint16_t data, SPITransferMode mode)
 {
-    union { uint16_t val; struct { uint8_t lsb; uint8_t msb; }; } t;
-    t.val = _data;
+    union {
+        uint16_t val;
+        struct {
+            uint8_t lsb;
+            uint8_t msb;
+        };
+    } t;
 
-    if (bitOrder == LSBFIRST) {
-        t.lsb = transfer(_pin, t.lsb, SPI_CONTINUE);
-        t.msb = transfer(_pin, t.msb, _mode);
+    t.val = data;
+
+    if (_bitOrder == LSBFIRST) {
+        t.lsb = transfer(pin, t.lsb, SPI_CONTINUE);
+        t.msb = transfer(pin, t.msb, mode);
     } else {
-        t.msb = transfer(_pin, t.msb, SPI_CONTINUE);
-        t.lsb = transfer(_pin, t.lsb, _mode);
+        t.msb = transfer(pin, t.msb, SPI_CONTINUE);
+        t.lsb = transfer(pin, t.lsb, mode);
     }
-    //printf("Master write: %04X\n\r", t.val);
-    
-    _data = t.val;
-    return _data;
+    // printf("\r\n[INFO] Master write: %04X\n", t.val);
+
+    data = t.val;
+    return data;
 }
 
-uint16_t SPIClass::transfer16(uint16_t _data, SPITransferMode _mode)
+uint16_t SPIClass::transfer16(uint16_t data, SPITransferMode mode)
 {
-    return transfer16(pinSS, _data, _mode);
+    return transfer16(_pinSS, data, mode);
 }
 
-void SPIClass::setBitOrder(uint8_t _pin, BitOrder _bitOrder)
+int SPIClass::slaveRead(void)
 {
-    (void)_pin;
-
-    bitOrder = _bitOrder;
+    return spi_slave_read(pSpiSlave);
 }
 
-void SPIClass::setDataMode(uint8_t _pin, uint8_t _mode)
+void SPIClass::setBitOrder(uint8_t pin, BitOrder order)
 {
-    (void)_pin;
+    (void)pin;
 
-    spi_format((spi_t *)pSpiMaster, 8, _mode, 0);
+    _bitOrder = order;
 }
 
-void SPIClass::setClockDivider(uint8_t _pin, uint8_t _divider)
+void SPIClass::setBitOrder(BitOrder order)
 {
-    (void)_pin;
-    (void)_divider;
+    setBitOrder(_pinSS, order);
+}
 
+void SPIClass::setDataMode(uint8_t bits, uint8_t dataMode, char SPI_mode)
+{
+    _dataBits = bits;
+    _dataMode = dataMode;
+    _SPI_Mode = SPI_mode;
+
+    if (initStatus) {
+        if (_SPI_Mode == SPI_MODE_MASTER) {
+            spi_format(pSpiMaster, _dataBits, _dataMode, 0);
+        } else if (_SPI_Mode == SPI_MODE_SLAVE) {
+            spi_format(pSpiSlave, _dataBits, _dataMode, 1);
+        }
+    }
+}
+
+void SPIClass::setClockDivider(uint8_t pin, uint8_t divider)
+{
+    (void)pin;
+    (void)divider;
     // no effect on Ameba
 }
 
-void SPIClass::setBitOrder(BitOrder _order)
+void SPIClass::setClockDivider(uint8_t div)
 {
-    setBitOrder(pinSS, _order);
-}
-
-void SPIClass::setClockDivider(uint8_t _div)
-{
-    (void)_div;
-
+    (void)div;
     // no effect on Ameba
 }
 
-void SPIClass::setDefaultFrequency(int _frequency)
+void SPIClass::setDefaultFrequency(int frequency)
 {
-    defaultFrequency = _frequency;
+    _defaultFrequency = frequency;
 }
 
-void SPIClass::end(void)
+void SPIClass::end(char SPI_mode)
 {
-    spi_free((spi_t *)pSpiMaster);
+    _SPI_Mode = SPI_mode;
+
+    if (_SPI_Mode == SPI_MODE_MASTER) {
+        spi_free(pSpiMaster);
+    } else if (_SPI_Mode == SPI_MODE_SLAVE) {
+        spi_free(pSpiSlave);
+    }
 }
 
 //SPIClass SPI((void *)(&spi_obj0), 13, 14, 15, 12);
 //SPIClass SPI((void *)(&spi_obj0), 8, 10, 9, 7);
-SPIClass SPI((void *)(&spi_obj0), 20, 18, 19, 21);
-//SPIClass SPI1((void *)(&spi_obj1), 2, 0, 1, 3);
+
+#ifdef HUB8735_ULTRA
+    SPIClass SPI((void *)(&spi_obj0), SPI_MOSI, SPI_MISO, SPI_SCLK, SPI_SS);
+    SPIClass SPI1((void *)(&spi_obj1), SPI1_MOSI, SPI1_MISO, SPI1_SCLK, SPI1_SS);
+#else
+    SPIClass SPI((void *)(&spi_obj0), SPI1_MOSI, SPI1_MISO, SPI1_SCLK, SPI1_SS);
+#endif	

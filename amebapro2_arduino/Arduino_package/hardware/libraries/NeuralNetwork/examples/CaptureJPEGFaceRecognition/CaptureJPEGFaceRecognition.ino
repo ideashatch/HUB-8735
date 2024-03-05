@@ -42,13 +42,13 @@
 #include "VideoStreamOverlay.h"
 #include "AmebaFatFS.h"
 
-#define CHANNELVID  0 // Channel for RTSP streaming
-#define CHANNELJPEG 1 // Channel for taking snapshots
-#define CHANNELNN   3 // RGB format video for NN only avaliable on channel 3
+#define CHANNELVID  0    // Channel for RTSP streaming
+#define CHANNELJPEG 1    // Channel for taking snapshots
+#define CHANNELNN   3    // RGB format video for NN only available on channel 3
 
 // Customised resolution for NN
-#define NNWIDTH     576
-#define NNHEIGHT    320
+#define NNWIDTH  576
+#define NNHEIGHT 320
 
 #ifdef HUB8735_ULTRA
 #define RED_LED                   LED_B	//use internal blue led
@@ -72,8 +72,8 @@ StreamIO videoStreamer(1, 1);
 StreamIO videoStreamerFDFR(1, 1);
 StreamIO videoStreamerRGBFD(1, 1);
 
-char ssid[] = "Network_SSID";   // your network SSID (name)
-char pass[] = "Password";       // your network password
+char ssid[] = "Network_SSID";    // your network SSID (name)
+char pass[] = "Password";        // your network password
 int status = WL_IDLE_STATUS;
 
 bool buttonState = false;
@@ -87,7 +87,8 @@ int unknownCount = 0;
 // File Initialization
 AmebaFatFS fs;
 
-void setup() {
+void setup()
+{
     // GPIO Initialization
     pinMode(RED_LED, OUTPUT);
     pinMode(GREEN_LED, OUTPUT);
@@ -147,8 +148,9 @@ void setup() {
     OSD.begin();
 }
 
-void loop() {
-    if (regFace == true) { //Face Recognition mode on
+void loop()
+{
+    if (regFace == true) {    // Face Recognition mode on
         digitalWrite(RED_LED, HIGH);
         digitalWrite(GREEN_LED, HIGH);
         delay(500);
@@ -175,10 +177,10 @@ void loop() {
         }
         buttonState = digitalRead(BUTTON_PIN);
         if (buttonState == HIGH) {
-            regFace = false; // When button is pressed, face registration mode off.
+            regFace = false;    // When button is pressed, face registration mode off.
         }
     } else {
-      // Do something
+        // Do something
     }
 
     delay(2000);
@@ -187,7 +189,8 @@ void loop() {
 }
 
 // User callback function for post processing of face recognition results
-void FRPostProcess(std::vector<FaceRecognitionResult> results) {
+void FRPostProcess(std::vector<FaceRecognitionResult> results)
+{
     uint16_t im_h = configVID.height();
     uint16_t im_w = configVID.width();
 
@@ -195,7 +198,7 @@ void FRPostProcess(std::vector<FaceRecognitionResult> results) {
     OSD.createBitmap(CHANNELVID);
 
     if (facerecog.getResultCount() > 0) {
-        for (uint32_t i = 0; i < facerecog.getResultCount(); i++) {
+        for (int i = 0; i < facerecog.getResultCount(); i++) {
             FaceRecognitionResult item = results[i];
             // Result coordinates are floats ranging from 0.00 to 1.00
             // Multiply with RTSP resolution to get coordinates in pixels
@@ -210,13 +213,13 @@ void FRPostProcess(std::vector<FaceRecognitionResult> results) {
                 if (regFace == false) {
                     unknownDetected = true;
                     unknownCount++;
-                    if (unknownCount < (MAX_UNKNOWN_COUNT + 1)) { // Ensure number of snapshots under MAX_UNKNOWN_COUNT
-                        facerecog.registerFace("Stranger" + String(unknownCount)); // Register under named Stranger <No.> to prevent recapture of same unrecognised person twice
+                    if (unknownCount < (MAX_UNKNOWN_COUNT + 1)) {                     // Ensure number of snapshots under MAX_UNKNOWN_COUNT
+                        facerecog.registerFace("Stranger" + String(unknownCount));    // Register under named Stranger <No.> to prevent recapture of same unrecognised person twice
                         fs.begin();
-                        File file = fs.open(String(fs.getRootPath()) + "Stranger" + String(unknownCount) + ".jpg"); // Capture snapshot of stranger under name Stranger <No.>
+                        File file = fs.open(String(fs.getRootPath()) + "Stranger" + String(unknownCount) + ".jpg");    // Capture snapshot of stranger under name Stranger <No.>
                         delay(1000);
                         Camera.getImage(CHANNELJPEG, &img_addr, &img_len);
-                        file.write((uint8_t*)img_addr, img_len);
+                        file.write((uint8_t *)img_addr, img_len);
                         file.close();
                         fs.end();
                     }

@@ -21,7 +21,7 @@ void setup() {
 	    printf("==== size = %d ====\r\n", size);
 	    file.close();
 	    printf("==== content ====\r\n");
-	    fs.sd_upgrade();
+	    fs.sd_upgrade(1);	//1 will delete sd file
 	    printf("====   end   ====\r\n");
 	
 	    fs.end();
