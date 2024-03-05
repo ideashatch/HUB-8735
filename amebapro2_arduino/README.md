@@ -17,10 +17,10 @@
 |`4.0.4-build20230615` 		|`4.0.3-build20230414` | ***4.0.3 Release***	and ***update tools***		|
 |`4.0.5-Release-20230727` 	|`4.0.4-1`             | ***4.0.4 Release***								|
 |`4.0.6-Release-20230922` 	|`4.0.4-1`             | ***feature addition***	Add line Notify image		|
-|`4.0.7-Release-20231220` 	|`4.0.5`               | ***Add NN for Audio classification and support portable|
-|`4.0.8-Release-20240115` 	|`4.0.5`               | ***Add new board "HUB 8735 ultra" ***				|
-|`4.0.9-Release-20240125` 	|`4.0.5`               | ***bug fix ***				                        |
-|`4.0.10-Release` 	        |`4.0.6`               | ***bug fix *** and ***update tools 1.2.14***		|
+|`4.0.7-Release-20231220` 	|`4.0.5`               | ***Add NN for Audio classification and support portable***|
+|`4.0.8-Release-20240115` 	|`4.0.5`               | ***Add new board "HUB 8735 ultra"***				|
+|`4.0.9-Release-20240125` 	|`4.0.5`               | ***bug fix***				                        |
+|`4.0.10-Release` 	        |`4.0.6`               | ***bug fix*** and ***update tools 1.2.14***		|
 </br>
 
 ## 2. How to add HUB 8735 Ameba Arduino package to `Arduino IDE`:
