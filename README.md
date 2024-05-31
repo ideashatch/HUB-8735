@@ -1,10 +1,15 @@
 # HUB-8735
-## 1. HUB 8735¤u¨ã¥]:
+## 1. HUB 8735 ultra toolkit
 
-> HUB 8735¤u¨ã¥]¤º§tHUB 8735 Hardware ¤Î Software¸ê®Æ¡C
+> HUB 8735 ultra toolkit contains HUB 8735 ultra Hardware and Software informationã€‚
 </br>
 
-## 2. amebapro2_arduino:
+## 2. HUB 8735å·¥å…·åŒ…:
 
-> HUB 8735 arduino ¬ÛÃöSDKÀÉ®×¡C
+> HUB 8735å·¥å…·åŒ…å…§å«HUB 8735 Hardware åŠ Softwareè³‡æ–™ã€‚
+</br>
+
+## 3. amebapro2_arduino:
+
+> HUB 8735 arduino ç›¸é—œSDKæª”æ¡ˆã€‚
 </br>
