@@ -21,6 +21,7 @@
 |`4.0.8-Release-20240115` 	|`4.0.5`               | ***Add new board "HUB 8735 ultra"***				|
 |`4.0.9-Release-20240125` 	|`4.0.5`               | ***bug fix***				                        |
 |`4.0.10-Release` 	        |`4.0.6`               | ***bug fix*** and ***update tools 1.2.14***		|
+|`4.0.11-Release` 	        |`4.0.7`               | ***feature addition*** and ***update tools 1.3.4***| 
 </br>
 
 ## 2. How to add HUB 8735 Ameba Arduino package to `Arduino IDE`:
@@ -61,3 +62,6 @@
     For more information, please refer to https://www.amebaiot.com/en/ameba-arduino-summary/
     
     </br>
+## 3. License:
+
+> The overall project is licensed under the MIT License. See the [LICENSE](https://github.com/ideashatch/HUB-8735/blob/main/amebapro2_arduino/LICENSE.txt) file for details.
