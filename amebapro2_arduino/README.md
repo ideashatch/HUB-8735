@@ -22,6 +22,7 @@
 |`4.0.9-Release-20240125` 	|`4.0.5`               | ***bug fix***				                        |
 |`4.0.10-Release` 	        |`4.0.6`               | ***bug fix*** and ***update tools 1.2.14***		|
 |`4.0.11-Release` 	        |`4.0.7`               | ***feature addition*** and ***update tools 1.3.4***| 
+|`4.0.12-Release` 	        |`4.0.7`               | ***bug fix*** and ***update tools 1.3.5*** remove 4.0.11| 
 </br>
 
 ## 2. How to add HUB 8735 Ameba Arduino package to `Arduino IDE`:
