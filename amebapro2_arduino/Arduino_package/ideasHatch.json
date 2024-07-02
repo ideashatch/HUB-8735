@@ -596,21 +596,21 @@
             {
               "host": "i686-mingw32",
               "archiveFileName": "ameba_pro2_tools_windows-1.3.5.tar.gz",
-              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_windows-1.3.4.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_windows-1.3.5.tar.gz",
               "checksum": "SHA-256:155d1237e0cc053b8618d86ec0568a143a86662038edb3510e41cb0c5d91e2a0",
               "size": "6224271"
             },
             {
               "host": "x86_64-pc-linux-gnu",
               "archiveFileName": "ameba_pro2_tools_linux-1.3.5.tar.gz",
-              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_linux-1.3.4.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_linux-1.3.5.tar.gz",
               "checksum": "SHA-256:fb8a635708c0f8b06909d77218a1f183679604165be914208a5fa79449741dfa",
               "size": "6281921"
             },
             {
               "host": "x86_64-apple-darwin",
               "archiveFileName": "ameba_pro2_tools_macos-1.3.5.tar.gz",
-              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_macos-1.3.4.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_macos-1.3.5.tar.gz",
               "checksum": "SHA-256:83bb42dcf2cbf0947b66dc3599099e4a93e6491f24525250f1417e7c10b511b7",
               "size": "1069901"
             }
