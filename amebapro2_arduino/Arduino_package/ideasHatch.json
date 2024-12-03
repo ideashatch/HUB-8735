@@ -18,8 +18,8 @@
           },
           "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.14-build20241129_HUB8735.tar.gz",
           "archiveFileName": "4.0.14-build20241129_HUB8735.tar.gz",
-          "checksum": "SHA-256:e6f2c71c9220383ce58f352509cb9e4257bd428005e01a6ab97ca25077354a43",
-          "size": "69404478",
+          "checksum": "SHA-256:19ab92dcb1817a801ca72d7696a9aa437ada1f0ef0d5e040b8e300c134a1e4e1",
+          "size": "69404475",
           "boards": [
             {"name": "HUB 8735 (RTL8735B)"},
             {"name": "HUB 8735 ultra (RTL8735B)"}
