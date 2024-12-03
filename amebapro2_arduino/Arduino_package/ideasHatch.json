@@ -11,6 +11,45 @@
       	{
           "name": "ideasHatch Ameba Boards (32-bit Arm v8M @500MHz)",
           "architecture": "AmebaPro2",
+          "version": "4.0.14-Release",
+          "category": "Contributed",
+          "help": {
+            "online": "https://forum.amebaiot.com/"
+          },
+          "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/4.0.14-build20241129_HUB8735.tar.gz",
+          "archiveFileName": "4.0.14-build20241129_HUB8735.tar.gz",
+          "checksum": "SHA-256:e6f2c71c9220383ce58f352509cb9e4257bd428005e01a6ab97ca25077354a43",
+          "size": "69404478",
+          "boards": [
+            {"name": "HUB 8735 (RTL8735B)"},
+            {"name": "HUB 8735 ultra (RTL8735B)"}
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "ideasHatch",
+              "name": "ameba_pro2_toolchain",
+              "version": "1.0.1-p1"
+            },
+            {
+              "packager": "ideasHatch",
+              "name": "ameba_pro2_toolchain2",
+              "version": "1.0.1-p2"
+            },
+            {
+              "packager": "ideasHatch",
+              "name": "ameba_pro2_tools",
+              "version": "1.4.0"
+            },
+            {
+              "packager": "ideasHatch",
+              "name": "ameba_pro2_nn_models",
+              "version": "1.0.2"
+            }
+          ]
+        },
+      	{
+          "name": "ideasHatch Ameba Boards (32-bit Arm v8M @500MHz)",
+          "architecture": "AmebaPro2",
           "version": "4.0.13-Release",
           "category": "Contributed",
           "help": {
@@ -522,6 +561,33 @@
       "tools": [
       {
           "name": "ameba_pro2_nn_models",
+          "version":"1.0.2",
+          "systems": [
+            {
+              "host":"i686-mingw32",
+              "archiveFileName":"ameba_pro2_nn_models-1.0.2.tar.gz",
+              "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_nn_models-1.0.2.tar.gz",
+              "checksum":"SHA-256:9811b84a1c5db59cd64e28c19f30e183a958becf24f68c84db3d2f1865f6c735",
+              "size":"33649407"
+            },
+            {
+              "host":"x86_64-pc-linux-gnu",
+              "archiveFileName":"ameba_pro2_nn_models-1.0.2.tar.gz",
+              "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_nn_models-1.0.2.tar.gz",
+              "checksum":"SHA-256:9811b84a1c5db59cd64e28c19f30e183a958becf24f68c84db3d2f1865f6c735",
+              "size":"33649407"
+            },
+            {
+              "host":"x86_64-apple-darwin",
+              "archiveFileName":"ameba_pro2_nn_models-1.0.2.tar.gz",
+              "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_nn_models-1.0.2.tar.gz",
+              "checksum":"SHA-256:9811b84a1c5db59cd64e28c19f30e183a958becf24f68c84db3d2f1865f6c735",
+              "size":"33649407"
+            }
+          ]
+        },
+      {
+          "name": "ameba_pro2_nn_models",
           "version":"0.0.0",
           "systems": [
             {
@@ -625,6 +691,33 @@
               "url":"https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_toolchain_macos-1.0.1-p2.tar.bz2",
               "checksum":"SHA-256:892a0a6848863b0853a0b60a3fcfedb703d897961615274049f8fca036c9db32",
               "size":"77770301"
+            }
+          ]
+        },
+        {
+          "name": "ameba_pro2_tools",
+          "version": "1.4.0",
+          "systems": [
+            {
+              "host": "i686-mingw32",
+              "archiveFileName": "ameba_pro2_tools_windows-1.4.0.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_windows-1.4.0.tar.gz",
+              "checksum": "SHA-256:aa4bd34817fb0cb8c66f154eb01d6dfe51dbcb6cf92ce1f6da6a03692ee6fe76",
+              "size": "8965719"
+            },
+            {
+              "host": "x86_64-pc-linux-gnu",
+              "archiveFileName": "ameba_pro2_tools_linux-1.4.0.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_linux-1.4.0.tar.gz",
+              "checksum": "SHA-256:c6e5c40ea1a5662369051d02c96f164a950917b0ea96fc93723c0fc49a130478",
+              "size": "12852900"
+            },
+            {
+              "host": "x86_64-apple-darwin",
+              "archiveFileName": "ameba_pro2_tools_macos-1.4.0.tar.gz",
+              "url": "https://github.com/ideashatch/HUB-8735/raw/main/amebapro2_arduino/Arduino_package/release/ameba_pro2_tools_macos-1.4.0.tar.gz",
+              "checksum": "SHA-256:c2e46951e191cc22c0d13d2eb6a3d6f89371ba746a5ed5a5875acd63a1bfa998",
+              "size": "11157822"
             }
           ]
         },
